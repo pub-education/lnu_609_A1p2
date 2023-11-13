@@ -9,4 +9,8 @@ public class App {
     public static void main(String[] args) {
        
     }
+
+    public String createPlayer() {
+        return "player";
+    }
 }

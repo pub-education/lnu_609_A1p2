@@ -4,9 +4,6 @@
 package sinking_ships.controller;
 
 import org.junit.jupiter.api.Test;
-
-import sinking_ships.view.MainView;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
@@ -17,10 +14,15 @@ class AppTest {
     }
 
     @Test
-    public void shouldBeAbleToCreatePlayer() {
+    public void shouldBeAbleToCallCreatePlayer() {
         App app = new App();
         assertNotNull(app.createPlayer(), "should be able to create player");
     }
 
-
+    @Test
+    public void shouldReturnPlayer() {
+        App app = new App();
+        Player actual = app.createPlayer();
+        assertTrue(actual instanceof Player);
+    }
 }
