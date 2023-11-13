@@ -15,6 +15,12 @@ repositories {
     mavenCentral()
 }
 
+// Define a default value for the output file name
+ext {
+    testOutputFile = "defaultTestOutput.log"
+    logPath = "$rootDir/testResults"
+}
+
 dependencies {
     // Use JUnit Jupiter for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.3'
@@ -40,4 +46,26 @@ application {
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+
+    // Configure the test task
+
+    // Check if a custom output file name is provided
+    if (project.hasProperty('testOutput')) {
+        testOutputFile = project.property('testOutput')
+    }
+
+    // Configure test logging
+    testLogging {
+        // Set options for logging test output
+        events 'passed', 'skipped', 'failed'
+
+        // Log output to a file based on the provided property
+        onOutput { descriptor, event ->
+            def outputFile = new File("${rootDir}/testResults/${testOutputFile}")
+            outputFile.parentFile.mkdirs() // Create directories if they don't exist
+            outputFile.withWriterAppend { writer ->
+                writer.write("${event.message}\n")
+            }
+        }
+    }
 }
