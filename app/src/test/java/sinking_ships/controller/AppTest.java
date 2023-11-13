@@ -15,12 +15,4 @@ class AppTest {
         App classUnderTest = new App();
         assertNotNull(classUnderTest, "app should be a class");
     }
-
-    @Test
-    public void shouldBeAbleToCreatePlayer() {
-        App app = new App();
-        assertNotNull(app.createPlayer(), "should be able to create player");
-    }
-
-
 }

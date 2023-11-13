@@ -3,7 +3,7 @@ package sinking_ships.model;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class gameTest {
+public class GameTest {
   @Test
   public void gameExists() {
     Game game = new Game();
