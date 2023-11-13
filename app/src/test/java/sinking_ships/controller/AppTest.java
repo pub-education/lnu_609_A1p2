@@ -5,11 +5,22 @@ package sinking_ships.controller;
 
 import org.junit.jupiter.api.Test;
 
+import sinking_ships.view.MainView;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
-    @Test void appExists() {
+    @Test
+    void appExists() {
         App classUnderTest = new App();
         assertNotNull(classUnderTest, "app should be a class");
     }
+
+    @Test
+    public void shouldBeAbleToCreatePlayer() {
+        App app = new App();
+        assertNotNull(app.createPlayer(), "should be able to create player");
+    }
+
+
 }

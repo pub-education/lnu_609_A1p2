@@ -9,4 +9,6 @@ public class mainViewTest {
     MainView mainView = new MainView();
     assertNotNull(mainView, "mainView should be a class");
   }
+
+  
 }
