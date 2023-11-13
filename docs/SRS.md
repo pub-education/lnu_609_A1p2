@@ -14,7 +14,7 @@ Sink Ships is a command-line application where players input coordinates to targ
 - **SRS:** Software Requirements Specification
 
 ### 1.4 References
-- Hasbro, Inc. Battleship Game Rules [[1](#ref-1)]
+- Hasbro, Inc. Battleship Game Rules [[1](#ref-1-battleship-rules)]
 - Sink Ships Game Rules [[2](#ref-2-sink-ships-rules)]
 
 ### 1.5 Overview
