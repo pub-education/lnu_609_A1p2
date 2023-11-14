@@ -1,14 +1,19 @@
-> Task :app:compileJava
+> Task :app:compileJava UP-TO-DATE
 > Task :app:processResources NO-SOURCE
-> Task :app:classes
+> Task :app:classes UP-TO-DATE
 
 > Task :app:compileTestJava FAILED
-E:\Education\Linneuniversitetet\04 Kurser HT-23\1dv609 Mjukvarutestning\Assignments\a1.2\app\src\test\java\sinking_ships\controller\AppTest.java:22: error: cannot find symbol
-        assertNotNull(app.createPlayer(), "should be able to create player");
-                         ^
-  symbol:   method createPlayer()
-  location: variable app of type App
-1 error
+E:\Education\Linneuniversitetet\04 Kurser HT-23\1dv609 Mjukvarutestning\Assignments\a1.2\app\src\test\java\sinking_ships\model\GameTest.java:9: error: cannot find symbol
+    Game game = new Game();
+    ^
+  symbol:   class Game
+  location: class GameTest
+E:\Education\Linneuniversitetet\04 Kurser HT-23\1dv609 Mjukvarutestning\Assignments\a1.2\app\src\test\java\sinking_ships\model\GameTest.java:9: error: cannot find symbol
+    Game game = new Game();
+                    ^
+  symbol:   class Game
+  location: class GameTest
+2 errors
 
 FAILURE: Build failed with an exception.
 
@@ -21,4 +26,4 @@ Execution failed for task ':app:compileTestJava'.
 > Run with --scan to get full insights.
 
 BUILD FAILED in 2s
-2 actionable tasks: 2 executed
+2 actionable tasks: 1 executed, 1 up-to-date
