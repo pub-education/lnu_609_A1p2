@@ -4,9 +4,6 @@
 package sinking_ships.controller;
 
 import org.junit.jupiter.api.Test;
-
-import sinking_ships.view.MainView;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
