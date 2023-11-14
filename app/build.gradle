@@ -56,7 +56,6 @@ spotbugsTest {
 jacoco {
   toolVersion = jacocoVersion
   reportsDirectory = layout.buildDirectory.dir("reports/jacoco")
-  // reportsDirectory = layout.buildDirectory.dir("reports/jacoco")
 }
 
 test {
