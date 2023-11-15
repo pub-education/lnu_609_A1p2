@@ -77,7 +77,14 @@ public class mainViewTest {
     String expectedBoardString = mainView.boardArrayToString(mockBoardArray);
     verify(printstream, atLeastOnce()).println(expectedBoardString);
   }
-  
+
+  @Test
+  public void mainViewShouldBeAbleToClearScreen() {
+    mainView.clearScreen();
+    verify(printstream, times(50)).println();
+  }
+
+
   // view should have a method to display clear the screen
 
   // view should have a method to press enter to continue
