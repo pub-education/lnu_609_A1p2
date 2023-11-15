@@ -2,25 +2,32 @@ package sinking_ships.view;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class mainViewTest {
 
+  private PrintStream printstream;
+  private InputStream inputStream;
+  private MainView mainView;
+
+  @BeforeEach
+  public void setUp() {
+    this.printstream = mock(PrintStream.class);
+    this.inputStream = mock(InputStream.class);
+    this.mainView = new MainView(printstream, inputStream);
+  }
+
   @Test
   public void mainViewExists() {
-    PrintStream printstream = mock(PrintStream.class);
-    InputStream inputStream = mock(InputStream.class);
-    MainView mainView = new MainView(printstream, inputStream);
     assertNotNull(mainView, "mainView should be a class");
   }
 
   @Test
   public void mainViewShouldBeAbleToDisplayMessage() {
-    PrintStream printstream = mock(PrintStream.class);
-    InputStream inputStream = mock(InputStream.class);
-    MainView mainView = new MainView(printstream, inputStream);
     String message = "Hello World!";
     String expected = message;
     mainView.displayMessage(message);
