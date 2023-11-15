@@ -38,4 +38,9 @@ public class MainView {
     }
     return boardString.toString();
   }
+
+  public void displayBoard(Cell[][] boardArray) {
+    String boardString = boardArrayToString(boardArray);
+    displayMessage(boardString);
+  }
 }
