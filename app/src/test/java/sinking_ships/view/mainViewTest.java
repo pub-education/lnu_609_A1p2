@@ -43,17 +43,17 @@ public class mainViewTest {
     Cell[][] mockBoardArray = createMockBoardArray(10, 10);
     String actual = mainView.boardArrayToString(mockBoardArray);
     String expected =
-     "J  -  -  -  -  -  -  -  -  -  -\n" +
-     "I  -  -  -  -  -  -  -  -  -  -\n" +
-     "H  -  -  -  -  -  -  -  -  -  -\n" +
-     "G  -  -  -  -  -  -  -  -  -  -\n" +
-     "F  -  -  -  -  -  -  -  -  -  -\n" +
-     "E  -  -  -  -  -  -  -  -  -  -\n" +
-     "D  -  -  -  -  -  -  -  -  -  -\n" +
-     "C  -  -  -  -  -  -  -  -  -  -\n" +
-     "B  -  -  -  -  -  -  -  -  -  -\n" +
-     "A  -  -  -  -  -  -  -  -  -  -\n" +
-     "   1  2  3  4  5  6  7  8  9  10\n";
+     "   1  2  3  4  5  6  7  8  9  10  \n" +
+     "A  -  -  -  -  -  -  -  -  -  -  \n" +
+     "B  -  -  -  -  -  -  -  -  -  -  \n" +
+     "C  -  -  -  -  -  -  -  -  -  -  \n" +
+     "D  -  -  -  -  -  -  -  -  -  -  \n" +
+     "E  -  -  -  -  -  -  -  -  -  -  \n" +
+     "F  -  -  -  -  -  -  -  -  -  -  \n" +
+     "G  -  -  -  -  -  -  -  -  -  -  \n" +
+     "H  -  -  -  -  -  -  -  -  -  -  \n" +
+     "I  -  -  -  -  -  -  -  -  -  -  \n" +
+     "J  -  -  -  -  -  -  -  -  -  -  \n";
 
     assertEquals(expected, actual);
   }
