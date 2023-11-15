@@ -43,4 +43,10 @@ public class MainView {
     String boardString = boardArrayToString(boardArray);
     displayMessage(boardString);
   }
+
+  public void clearScreen() {
+    for (int i = 0; i < 50; i++) {
+        out.println();
+    }
+  }
 }
