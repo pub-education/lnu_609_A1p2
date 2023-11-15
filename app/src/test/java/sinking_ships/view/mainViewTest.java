@@ -5,6 +5,10 @@ import java.io.PrintStream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import sinking_ships.model.Board;
+import sinking_ships.model.Cell;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -34,9 +38,38 @@ public class mainViewTest {
     verify(printstream, atLeastOnce()).println(expected);
   }
 
-  // view should have a method to display a welcome message
+  @Test
+  public void boardArrayToStringShouldBeAbleToCreateStringFromArrayOfCells() {
+    Cell[][] mockBoardArray = createMockBoardArray(10, 10);
+    String actual = mainView.boardArrayToString(mockBoardArray);
+    String expected =
+     "J  -  -  -  -  -  -  -  -  -  -\n" +
+     "I  -  -  -  -  -  -  -  -  -  -\n" +
+     "H  -  -  -  -  -  -  -  -  -  -\n" +
+     "G  -  -  -  -  -  -  -  -  -  -\n" +
+     "F  -  -  -  -  -  -  -  -  -  -\n" +
+     "E  -  -  -  -  -  -  -  -  -  -\n" +
+     "D  -  -  -  -  -  -  -  -  -  -\n" +
+     "C  -  -  -  -  -  -  -  -  -  -\n" +
+     "B  -  -  -  -  -  -  -  -  -  -\n" +
+     "A  -  -  -  -  -  -  -  -  -  -\n" +
+     "   1  2  3  4  5  6  7  8  9  10\n";
 
-  // view should have a method to display the board
+    assertEquals(expected, actual);
+  }
+
+  private Cell[][] createMockBoardArray(int width, int height) {
+    Cell[][] mockBoardArray = new Cell[height][width];
+    for (int y = 0; y < height; y++) {
+      for (int x = 0; x < width; x++) {
+        Cell mockCell = mock(Cell.class);
+        when(mockCell.getValue()).thenReturn("-");
+        mockBoardArray[y][x] = mockCell;
+      }
+    }
+    return mockBoardArray;
+  }
+    // view should have a method to display the board
   
   // view should have a method to display clear the screen
 
