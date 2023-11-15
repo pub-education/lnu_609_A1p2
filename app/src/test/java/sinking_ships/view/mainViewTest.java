@@ -69,7 +69,14 @@ public class mainViewTest {
     }
     return mockBoardArray;
   }
-    // view should have a method to display the board
+
+  @Test
+  public void mainViewShouldBeAbleToDisplayBoard() {
+    Cell[][] mockBoardArray = createMockBoardArray(10, 10);
+    mainView.displayBoard(mockBoardArray);
+    String expectedBoardString = mainView.boardArrayToString(mockBoardArray);
+    verify(printstream, atLeastOnce()).println(expectedBoardString);
+  }
   
   // view should have a method to display clear the screen
 
