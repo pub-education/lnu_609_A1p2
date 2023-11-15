@@ -16,9 +16,9 @@
     - Place ships on board
     - Player do this through command line
     - Computer does this randomly automatically
-  
 
   ##### Player placement of ships via terminal
+
   1. Asks for coordinate for the aft of the ship
   2. Player enters coordinate of the for letter number e.g., d4
   3. Print out the sea (Board) with the ship pointing East if possible otherwise West.
@@ -26,6 +26,49 @@
   5. Asks for rotation n North, e East, s South, w West 
   6. If ship placement is OK repaint the sea (Board) with the ship in the requested direction.
   7. Then next ship otherwise repeat.
+
+### Classes responsibilities (to be deleted - Joakims damned notes)
+
+#### Point
+
+- x int
+- y int
+
+#### Cell
+
+- position Point
+- value [from Enum Ship -, A, a, B, b, C, c, D, d, S, s, +]
+- hidden true/false
+- hit?? true/false (conveniant but can be derived from value)
+
+#### Ship
+  Could be interface and different shiptypes could realize interface. Strategy to build ships in factory.
+- aft Point (insertion point)
+- rotation [enum ]
+- cells []
+- length int
+- type [enum will give cell value/type]
+
+#### Board
+
+- cells []
+- ships []
+
+#### Game
+player
+computer
+rules
+
+init() - build board, 
+
+Abstract player above player1 computerPlayer1?
+
+#### Player
+
+board
+
+#### Computer
+board
 
 ### Game
 - First print out the own sea (board) 
