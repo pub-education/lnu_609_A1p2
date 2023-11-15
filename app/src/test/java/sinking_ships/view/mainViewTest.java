@@ -1,5 +1,6 @@
 package sinking_ships.view;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
@@ -86,26 +87,23 @@ public class mainViewTest {
     verify(printstream, times(50)).println();
   }
 
-  
-
-
-
-  // view should have a method to press enter to continue
-  @Test
-  public void mainViewShouldBeAbleToPressEnterToContinue() {
+@Test
+public void mainViewShouldBeAbleToPressEnterToContinue() throws IOException {
     PipedOutputStream pos = new PipedOutputStream();
-    InputStream in = new PipedInputStream(pos);
-    MainView mainView = new MainView(printstream, in);
-    new Thread(() -> mainView.pressEnterToContinue()).start();
-    pos.write('\n');
+    PipedInputStream pis = new PipedInputStream(pos);
+    MainView mainView = new MainView(printstream, pis);
+    new Thread(() -> {
+        mainView.pressEnterToContinue();
+    }).start();
+    pos.write("\n".getBytes());
+    pos.flush();
     pos.close();
     verify(printstream, atLeastOnce()).println("Press enter to continue...");
-  }
+}
 
 
   // view should have a method to collect user input
-  @Test
-  public void mainViewShouldBeAbleToGetUserInput() {
+  
 
   // view should have a method to display a message
 

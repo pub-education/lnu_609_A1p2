@@ -49,4 +49,13 @@ public class MainView {
         out.println();
     }
   }
+
+  public void pressEnterToContinue() {
+    displayMessage("Press enter to continue...");
+    try {
+      in.read();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 }
