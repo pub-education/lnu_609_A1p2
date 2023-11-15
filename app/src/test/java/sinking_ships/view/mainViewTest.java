@@ -1,9 +1,13 @@
 package sinking_ships.view;
 
+import java.io.InputStream;
+import java.io.PrintStream;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 public class mainViewTest {
+
   @Test
   public void mainViewExists() {
     MainView mainView = new MainView();
@@ -12,11 +16,13 @@ public class mainViewTest {
 
   @Test
   public void mainViewShouldBeAbleToDisplayMessage() {
-    MainView mainView = new MainView();
+    PrintStream printstream = mock(PrintStream.class);
+    InputStream inputStream = mock(InputStream.class);
+    MainView mainView = new MainView(printstream, inputStream);
     String message = "Hello World!";
     String expected = message;
-    String actual = mainView.displayMessage(message);
-    assertEquals(expected, actual);
+    mainView.displayMessage(message);
+    verify(printstream, atLeastOnce()).println(expected);
   }
 
   // view should have a method to display a welcome message
