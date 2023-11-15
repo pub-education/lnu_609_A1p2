@@ -10,7 +10,9 @@ public class mainViewTest {
 
   @Test
   public void mainViewExists() {
-    MainView mainView = new MainView();
+    PrintStream printstream = mock(PrintStream.class);
+    InputStream inputStream = mock(InputStream.class);
+    MainView mainView = new MainView(printstream, inputStream);
     assertNotNull(mainView, "mainView should be a class");
   }
 
