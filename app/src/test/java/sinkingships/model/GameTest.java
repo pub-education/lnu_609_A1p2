@@ -13,4 +13,10 @@ public class GameTest {
     Game game = new Game();
     assertNotNull(game, "game should be a class");
   }
+
+  @Test
+  public void gameHasBoard() {
+    Game game = new Game();
+    assertNotNull(game.getBoard(), "game should have a board");
+  }
 }
