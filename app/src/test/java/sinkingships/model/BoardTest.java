@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
  */
 public class BoardTest {
   
-    //   @Test
-    // void boardExists() {
-    //     Board classUnderTest = new Board();
-    //     assertNotNull(classUnderTest, "Class should exist!");
-    // }
+      @Test
+    void boardExists() {
+        Board classUnderTest = new Board();
+        assertNotNull(classUnderTest, "Class should exist!");
+    }
 }
