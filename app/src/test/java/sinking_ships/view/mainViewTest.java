@@ -87,25 +87,37 @@ public class mainViewTest {
     verify(printstream, times(50)).println();
   }
 
-@Test
-public void mainViewShouldBeAbleToPressEnterToContinue() throws IOException {
-    PipedOutputStream pos = new PipedOutputStream();
-    PipedInputStream pis = new PipedInputStream(pos);
-    MainView mainView = new MainView(printstream, pis);
-    new Thread(() -> {
-        mainView.pressEnterToContinue();
-    }).start();
-    pos.write("\n".getBytes());
-    pos.flush();
-    pos.close();
-    verify(printstream, atLeastOnce()).println("Press enter to continue...");
-}
+  // Consider doing this as a manual test instead.
+  // It depends on simulated user input and may be flaky.
+  @Test
+  public void mainViewShouldBeAbleToPressEnterToContinue() throws IOException {
+      PipedOutputStream pos = new PipedOutputStream();
+      PipedInputStream pis = new PipedInputStream(pos);
+      MainView mainView = new MainView(printstream, pis);
+      new Thread(() -> {
+          mainView.pressEnterToContinue();
+      }).start();
+      pos.write("\n".getBytes());
+      pos.flush();
+      pos.close();
+      verify(printstream, atLeastOnce()).println("Press enter to continue...");
+  }
 
 
   // view should have a method to collect user input
-  
+@Test
+public void shouldBeAbleToCollectInputfromUser() throws IOException {
+  PipedOutputStream pos = new PipedOutputStream();
+  PipedInputStream pis = new PipedInputStream(pos);
+  MainView mainView = new MainView(printstream, pis);
+  new Thread(() -> {
+      mainView.getUserInput();
+  }).start();
+  pos.write("A1".getBytes());
+  pos.flush();
+  pos.close();
+  assertEquals("A1", mainView.getUserInput());
 
-  // view should have a method to display a message
 
 
 }
