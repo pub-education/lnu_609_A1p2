@@ -1,0 +1,23 @@
+> Task :app:compileJava
+> Task :app:processResources NO-SOURCE
+> Task :app:classes
+> Task :app:compileTestJava
+> Task :app:processTestResources NO-SOURCE
+> Task :app:testClasses
+
+> Task :app:test
+
+AppTest > appExists() PASSED
+
+PlayerTest > playerExists() PASSED
+
+BoardTest > boardExists() PASSED
+
+GameTest > gameExists() PASSED
+
+MainViewTest > mainViewExists() PASSED
+
+> Task :app:jacocoTestReport
+
+BUILD SUCCESSFUL in 5s
+4 actionable tasks: 4 executed
