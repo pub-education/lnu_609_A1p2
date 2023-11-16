@@ -1,0 +1,26 @@
+java.lang.StringIndexOutOfBoundsException: Range [0, 0 + -1) out of bounds for length 1024
+
+	at java.base/jdk.internal.util.Preconditions$1.apply(Preconditions.java:55)
+
+	at java.base/jdk.internal.util.Preconditions$1.apply(Preconditions.java:52)
+
+	at java.base/jdk.internal.util.Preconditions$4.apply(Preconditions.java:213)
+
+	at java.base/jdk.internal.util.Preconditions$4.apply(Preconditions.java:210)
+
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:98)
+
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckFromIndexSize(Preconditions.java:118)
+
+	at java.base/jdk.internal.util.Preconditions.checkFromIndexSize(Preconditions.java:397)
+
+	at java.base/java.lang.String.checkBoundsOffCount(String.java:4596)
+
+	at java.base/java.lang.String.<init>(String.java:1435)
+
+	at sinking_ships.view.MainView.getUserInput(MainView.java:67)
+
+	at sinking_ships.view.mainViewTest.lambda$shouldBeAbleToCollectInputfromUser$1(mainViewTest.java:112)
+
+	at java.base/java.lang.Thread.run(Thread.java:1623)
+
