@@ -152,6 +152,16 @@ public class mainViewTest {
   }
 
   // Should be able to Collect a rotation from user and return a corresponding enum value
+  @Test
+  public void shouldBeAbleToCollectRotationFromUser() {
+    PrintStream printstream = mock(PrintStream.class);
+    String simulatedUserInput = "1\n";
+    InputStream inputStream = new ByteArrayInputStream(simulatedUserInput.getBytes());
+    MainView mainView = new MainView(printstream, inputStream);
+    String actual = mainView.getUserInputRotation();
+    verify(printstream).println("Enter rotation (1 = North, 2 = West, 3 = South, 4 = East): ");
+    Assertions.assertEquals("1", actual);
+  }
 
   // Should be able to present a winner either by player or computer (passed as object-copy).
   // pointless at this stage but could be used to extract game statistics.
