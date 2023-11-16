@@ -163,7 +163,7 @@ public class mainViewTest {
   // should be able to place cursor at a given coordinate on the screen.
   @Test
   public void shouldBeAbleToPlaceCursorAtGivenCoordinate() {
-    mainView.placeCursorAt(1, 1);
+    mainView.setCursorPosition(1, 1);
     verify(printstream).printf("\033[%d;%dH", 2, 2);
   }
 }

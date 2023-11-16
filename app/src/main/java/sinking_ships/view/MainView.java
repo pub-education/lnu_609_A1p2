@@ -106,4 +106,8 @@ public class MainView {
         break;
     }
   }
+
+  public void setCursorPosition(int row, int col) {
+    out.printf("\033[%d;%dH", row + 1, col + 1);
+  }
 }
