@@ -12,16 +12,17 @@ import java.io.PrintStream;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-<<<<<<< HEAD:app/src/test/java/sinking_ships/view/mainViewTest.java
 
-import sinking_ships.model.Board;
-import sinking_ships.model.Cell;
+import sinkingships.model.Board;
+import sinkingships.model.Cell;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class mainViewTest {
-
+/**
+ * Unit test for the MainView class.
+ */
+public class MainViewTest {
   private PrintStream printstream;
   private InputStream inputStream;
   private MainView mainView;
@@ -33,17 +34,9 @@ public class mainViewTest {
     this.mainView = new MainView(printstream, inputStream);
   }
 
-=======
-
-/**
- * Unit test for the MainView class.
- */
-public class MainViewTest {
->>>>>>> master:app/src/test/java/sinkingships/view/MainViewTest.java
   @Test
   public void mainViewExists() {
     assertNotNull(mainView, "mainView should be a class");
-<<<<<<< HEAD:app/src/test/java/sinking_ships/view/mainViewTest.java
   }
 
   @Test
@@ -180,7 +173,4 @@ public class MainViewTest {
     mainView.setCursorPosition(1, 1);
     verify(printstream).printf("\033[%d;%dH", 2, 2);
   }
-=======
-  }  
->>>>>>> master:app/src/test/java/sinkingships/view/MainViewTest.java
 }

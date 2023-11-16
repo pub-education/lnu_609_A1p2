@@ -1,8 +1,14 @@
 package sinkingships.model;
 
-/**
- * Unit test for the Player class.
- */
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import org.junit.jupiter.api.Test;
+
 public class PlayerTest {
   
+  @Test
+  void boardExists() {
+      Board classUnderTest = new Board();
+      assertNotNull(classUnderTest, "Class should exist!");
+  }
 }
