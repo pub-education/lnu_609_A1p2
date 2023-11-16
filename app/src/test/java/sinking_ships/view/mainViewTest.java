@@ -1,11 +1,13 @@
 package sinking_ships.view;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintStream;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -103,6 +105,8 @@ public class mainViewTest {
       verify(printstream, atLeastOnce()).println("Press enter to continue...");
   }
 
+  // Consider doing this as a manual test instead.
+  // It depends on simulated user input and may be flaky.
   @Test
   public void shouldBeAbleToCollectInputfromUser() throws IOException {
     PipedOutputStream pos = new PipedOutputStream();
@@ -119,5 +123,15 @@ public class mainViewTest {
     assertEquals(expected, actual);
   }
 
+  @Test
+  public void shouldBeAbleToCollectValideCoordinateFromUser() {
+    PrintStream printstream = mock(PrintStream.class);
+    String simulatedUserInput = "A1";
+    InputStream inputStream = new ByteArrayInputStream(simulatedUserInput.getBytes());
+    MainView mainView = new MainView(printstream, inputStream);
+    String actual = mainView.getInputCoordinates();
+    verify(printstream).println("Enter coordinate: ");
+    Assertions.assertEquals("A1", actual);
+  }
 
 }
