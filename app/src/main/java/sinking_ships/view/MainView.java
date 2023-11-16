@@ -58,4 +58,16 @@ public class MainView {
       e.printStackTrace();
     }
   }
+
+  protected String getUserInput() {
+    String input = "";
+    try {
+      byte[] buffer = new byte[1024];
+      int length = in.read(buffer);
+      input = new String(buffer, 0, length);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return input;
+  }
 }

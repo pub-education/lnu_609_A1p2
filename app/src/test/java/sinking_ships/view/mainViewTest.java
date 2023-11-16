@@ -103,21 +103,21 @@ public class mainViewTest {
       verify(printstream, atLeastOnce()).println("Press enter to continue...");
   }
 
-
-  // view should have a method to collect user input
-@Test
-public void shouldBeAbleToCollectInputfromUser() throws IOException {
-  PipedOutputStream pos = new PipedOutputStream();
-  PipedInputStream pis = new PipedInputStream(pos);
-  MainView mainView = new MainView(printstream, pis);
-  new Thread(() -> {
-      mainView.getUserInput();
-  }).start();
-  pos.write("A1".getBytes());
-  pos.flush();
-  pos.close();
-  assertEquals("A1", mainView.getUserInput());
-
+  @Test
+  public void shouldBeAbleToCollectInputfromUser() throws IOException {
+    PipedOutputStream pos = new PipedOutputStream();
+    PipedInputStream pis = new PipedInputStream(pos);
+    MainView mainView = new MainView(printstream, pis);
+    new Thread(() -> {
+        mainView.getUserInput();
+    }).start();
+    pos.write("A1".getBytes());
+    pos.flush();
+    pos.close();
+    String actual = mainView.getUserInput();
+    String expected = "A1";
+    assertEquals(expected, actual);
+  }
 
 
 }
