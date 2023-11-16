@@ -1,5 +1,6 @@
 package sinking_ships.view;
 
+import sinking_ships.model.Board;
 import sinking_ships.model.Cell;
 
 import java.io.InputStream;
@@ -90,5 +91,19 @@ public class MainView {
       attempts++;
     }
     throw new RuntimeException("Too many invalid inputs! Sleep on it!");
+  }
+
+  public void displayAttackResult(Board.Result result) {
+    switch (result) {
+      case HIT:
+        displayMessage("Hit!");
+        break;
+      case MISS:
+        displayMessage("Miss!");
+        break;
+      case HIT_AND_SUNK:
+        displayMessage("Hit and sunk!");
+        break;
+    }
   }
 }

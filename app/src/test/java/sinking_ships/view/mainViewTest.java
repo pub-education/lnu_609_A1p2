@@ -144,11 +144,11 @@ public class mainViewTest {
   // Should be able to present result of hit, miss, or hit and sunk by taking an enum value as arg and present a suitable text.
   @Test
   public void displayEnumText_shouldBeAbleToDisplayMessageMatchedWithEnumValue() {
-    mainView.displayResult(Board.Result.HIT);
+    mainView.displayAttackResult(Board.Result.HIT);
     verify(printstream).println("Hit!");
-    mainView.displayResult(Board.Result.MISS);
+    mainView.displayAttackResult(Board.Result.MISS);
     verify(printstream).println("Miss!");
-    mainView.displayResult(Board.Result.HIT_AND_SUNK);
+    mainView.displayAttackResult(Board.Result.HIT_AND_SUNK);
     verify(printstream).println("Hit and sunk!");
   }
 
