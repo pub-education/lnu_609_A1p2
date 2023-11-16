@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 
 import sinkingships.model.Board;
 import sinkingships.model.Cell;
+import sinkingships.model.Board;
+import sinkingships.model.Cell;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
