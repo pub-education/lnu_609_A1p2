@@ -1,0 +1,29 @@
+> Task :app:compileJava UP-TO-DATE
+> Task :app:processResources NO-SOURCE
+> Task :app:classes UP-TO-DATE
+
+> Task :app:compileTestJava FAILED
+E:\Education\Linneuniversitetet\04 Kurser HT-23\1dv609 Mjukvarutestning\Assignments\a1.2\app\src\test\java\sinkingships\model\BoardTest.java:14: error: cannot find symbol
+        Board classUnderTest = new Board();
+        ^
+  symbol:   class Board
+  location: class BoardTest
+E:\Education\Linneuniversitetet\04 Kurser HT-23\1dv609 Mjukvarutestning\Assignments\a1.2\app\src\test\java\sinkingships\model\BoardTest.java:14: error: cannot find symbol
+        Board classUnderTest = new Board();
+                                   ^
+  symbol:   class Board
+  location: class BoardTest
+2 errors
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:compileTestJava'.
+> Compilation failed; see the compiler error output for details.
+
+* Try:
+> Run with --info option to get more log output.
+> Run with --scan to get full insights.
+
+BUILD FAILED in 1s
+2 actionable tasks: 1 executed, 1 up-to-date

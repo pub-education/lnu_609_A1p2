@@ -146,11 +146,11 @@ public class MainViewTest {
 
   @Test
   public void displayEnumText_shouldBeAbleToDisplayMessageMatchedWithEnumValue() {
-    mainView.displayAttackResult(Board.Result.HIT);
+    mainView.displayAttackResult(Board.HIT);
     verify(printstream).println("Hit!");
-    mainView.displayAttackResult(Board.Result.MISS);
+    mainView.displayAttackResult(Board.MISS);
     verify(printstream).println("Miss!");
-    mainView.displayAttackResult(Board.Result.HIT_AND_SUNK);
+    mainView.displayAttackResult(Board.HIT_AND_SUNK);
     verify(printstream).println("Hit and sunk!");
   }
 

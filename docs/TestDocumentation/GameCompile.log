@@ -3,12 +3,12 @@
 > Task :app:classes UP-TO-DATE
 
 > Task :app:compileTestJava FAILED
-E:\Education\Linneuniversitetet\04 Kurser HT-23\1dv609 Mjukvarutestning\Assignments\a1.2\app\src\test\java\sinkingships\model\GameTest.java:9: error: cannot find symbol
+E:\Education\Linneuniversitetet\04 Kurser HT-23\1dv609 Mjukvarutestning\Assignments\a1.2\app\src\test\java\sinkingships\model\GameTest.java:13: error: cannot find symbol
     Game game = new Game();
     ^
   symbol:   class Game
   location: class GameTest
-E:\Education\Linneuniversitetet\04 Kurser HT-23\1dv609 Mjukvarutestning\Assignments\a1.2\app\src\test\java\sinkingships\model\GameTest.java:9: error: cannot find symbol
+E:\Education\Linneuniversitetet\04 Kurser HT-23\1dv609 Mjukvarutestning\Assignments\a1.2\app\src\test\java\sinkingships\model\GameTest.java:13: error: cannot find symbol
     Game game = new Game();
                     ^
   symbol:   class Game

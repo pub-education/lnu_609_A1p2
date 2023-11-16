@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 public class PlayerTest {
   
   @Test
-  void boardExists() {
-      Board classUnderTest = new Board();
-      assertNotNull(classUnderTest, "Class should exist!");
+  void playerExists() {
+      Player sut = new Player();
+      assertNotNull(sut, "Class should exist!");
   }
 }
