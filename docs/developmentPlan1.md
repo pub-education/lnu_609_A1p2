@@ -48,7 +48,7 @@
   Could be interface and different shiptypes could realize interface. Strategy to build ships in factory.
 
 - aft Point (insertion point)
-- rotation [enum ]
+- rotation [enum ] aft point + rotation could be a dto vector-class to compact the exchange with the view.
 - cells []
 - length int
 - type [enum will give cell value/type]
