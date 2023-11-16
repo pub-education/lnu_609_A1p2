@@ -92,16 +92,22 @@ public class mainViewTest {
   // Consider doing this as a manual test instead.
   // It depends on simulated user input and may be flaky.
   @Test
-  public void mainViewShouldBeAbleToPressEnterToContinue() throws IOException {
+  public void mainViewShouldBeAbleToPressEnterToContinue() throws IOException, InterruptedException {
       PipedOutputStream pos = new PipedOutputStream();
       PipedInputStream pis = new PipedInputStream(pos);
       MainView mainView = new MainView(printstream, pis);
-      new Thread(() -> {
+      Thread thread = new Thread(()-> {
+        try {
           mainView.pressEnterToContinue();
-      }).start();
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      });
+      thread.start();
       pos.write("\n".getBytes());
       pos.flush();
       pos.close();
+      Thread.sleep(1000);
       verify(printstream, atLeastOnce()).println("Press enter to continue...");
   }
 
@@ -124,14 +130,21 @@ public class mainViewTest {
   }
 
   @Test
-  public void shouldBeAbleToCollectValideCoordinateFromUser() {
+  public void shouldBeAbleToCollectValidCoordinateFromUser() {
     PrintStream printstream = mock(PrintStream.class);
-    String simulatedUserInput = "A1";
+    String simulatedUserInput = "A1\n";
     InputStream inputStream = new ByteArrayInputStream(simulatedUserInput.getBytes());
     MainView mainView = new MainView(printstream, inputStream);
-    String actual = mainView.getInputCoordinates();
+    String regex = "^[A-J][1-9]$";
+    String actual = mainView.getUserInputCoordinates(regex, "Only A1-J9 is allowed");
     verify(printstream).println("Enter coordinate: ");
     Assertions.assertEquals("A1", actual);
   }
 
+  // Should be able to present result of hit, miss, or hit and sunk by taking an enum as arg and present a suitable text.
+
+  // Should be able to present a winner either by player or computer (passed as object-copy).
+  // poinless at this stage but could be used to extract game statistics.
+
+  // Should be able to collect decision on whether to play again or quit.
 }

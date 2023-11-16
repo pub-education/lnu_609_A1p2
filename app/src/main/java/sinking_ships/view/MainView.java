@@ -60,14 +60,35 @@ public class MainView {
   }
 
   protected String getUserInput() {
-    String input = "";
     try {
-      byte[] buffer = new byte[1024];
+      byte[] buffer = new byte[100];
       int length = in.read(buffer);
-      input = new String(buffer, 0, length);
+      if (length == -1) {
+        return "";
+      }
+      return new String(buffer, 0, length).trim();
     } catch (Exception e) {
       e.printStackTrace();
+      return "";
     }
-    return input;
+  }
+
+  public String getUserInputCoordinates(String regex, String allowed) {
+    displayMessage("Enter coordinate: ");
+    int attempts = 0;
+    while (attempts < 3) {
+      String input = getUserInput();
+      if (input == null || input.equals("")) {
+        break;
+      }
+      input = input.toUpperCase();
+      if (input.matches(regex)) {
+        return input;
+      } else {
+        out.println("Invalid input! " + allowed + " Try again:");
+      }
+      attempts++;
+    }
+    throw new RuntimeException("Too many invalid inputs! Sleep on it!");
   }
 }
