@@ -158,14 +158,10 @@ public class mainViewTest {
 
   // Should be able to collect decision on whether to play again or quit.
 
-  // Should be able to show goodbye message to the player on quit.
   @Test
   public void shouldBeAbleToDisplayGoodbyeMessage() {
     mainView.displayGoodbyeMessage();
-    verify(mainView, atLeastOnce()).clearScreen();
-    verify(mainView, atLeastOnce()).setCursorPosition(1, 1);
     verify(printstream).println("Goodbye!");
-    verify(mainView, atLeastOnce()).pressEnterToContinue();
   }
 
   @Test

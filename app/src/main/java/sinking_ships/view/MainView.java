@@ -110,4 +110,11 @@ public class MainView {
   public void setCursorPosition(int row, int col) {
     out.printf("\033[%d;%dH", row + 1, col + 1);
   }
+
+  public void displayGoodbyeMessage() {
+    clearScreen();
+    setCursorPosition(1, 1);
+    displayMessage("Goodbye!");
+    pressEnterToContinue();
+  }
 }
