@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import sinkingships.model.Board;
+import sinkingships.model.ShotResponse;
 import sinkingships.model.Cell;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -146,11 +146,11 @@ public class MainViewTest {
 
   @Test
   public void displayEnumText_shouldBeAbleToDisplayMessageMatchedWithEnumValue() {
-    mainView.displayAttackResult(Board.HIT);
+    mainView.displayAttackResult(ShotResponse.HIT);
     verify(printstream).println("Hit!");
-    mainView.displayAttackResult(Board.MISS);
+    mainView.displayAttackResult(ShotResponse.MISS);
     verify(printstream).println("Miss!");
-    mainView.displayAttackResult(Board.HIT_AND_SUNK);
+    mainView.displayAttackResult(ShotResponse.HIT_AND_SUNK);
     verify(printstream).println("Hit and sunk!");
   }
 
