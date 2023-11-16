@@ -143,8 +143,11 @@ public class mainViewTest {
 
   // Should be able to present result of hit, miss, or hit and sunk by taking an enum as arg and present a suitable text.
 
+  // Should be able to Collect a rotation from user and return a corresponding enum value
+  
   // Should be able to present a winner either by player or computer (passed as object-copy).
-  // poinless at this stage but could be used to extract game statistics.
+  
+  // pointless at this stage but could be used to extract game statistics.
 
   // Should be able to collect decision on whether to play again or quit.
 }
