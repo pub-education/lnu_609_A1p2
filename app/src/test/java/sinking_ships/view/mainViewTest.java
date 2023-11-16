@@ -141,13 +141,25 @@ public class mainViewTest {
     Assertions.assertEquals("A1", actual);
   }
 
-  // Should be able to present result of hit, miss, or hit and sunk by taking an enum as arg and present a suitable text.
+  // Should be able to present result of hit, miss, or hit and sunk by taking an enum value as arg and present a suitable text.
+  @Test
+  public void displayEnumText_shouldBeAbleToDisplayMessageMatchedWithEnumValue() {
+    mainView.displayResult(Board.Result.HIT);
+    verify(printstream).println("Hit!");
+    mainView.displayResult(Board.Result.MISS);
+    verify(printstream).println("Miss!");
+    mainView.displayResult(Board.Result.HIT_AND_SUNK);
+    verify(printstream).println("Hit and sunk!");
+  }
 
   // Should be able to Collect a rotation from user and return a corresponding enum value
-  
+
   // Should be able to present a winner either by player or computer (passed as object-copy).
-  
   // pointless at this stage but could be used to extract game statistics.
 
   // Should be able to collect decision on whether to play again or quit.
+
+  // Should be able to say goodbye to the player on quit.
+
+  // should be able to place cursor at a given coordinate on the screen.
 }

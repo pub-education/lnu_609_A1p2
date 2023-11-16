@@ -84,7 +84,7 @@ board
 - Refresh boards and start rounds. HumanPlayer has the first turn as default.
 - Game asks for hit coordinate.
 - Player shoots by giving a coordinate of the form letter number e.g., d4
-- Computer responds with saying "hit", "miss", or "hit and sunk"
+- Computer responds with saying "hit", "miss", or "hit and sunk". Could be expanded to a dto-class 'damage-report' Who attacked? What range? What was hit? etc... To be implemented at jul!
 - Check for winner (by rule). If player has no ships left...
 - Present winner
 - Opt user for new game or quit.
