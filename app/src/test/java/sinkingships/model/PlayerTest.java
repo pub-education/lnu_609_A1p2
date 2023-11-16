@@ -1,4 +1,4 @@
-package sinking_ships.model;
+package sinkingships.model;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 

@@ -18,9 +18,9 @@ java.lang.StringIndexOutOfBoundsException: Range [0, 0 + -1) out of bounds for l
 
 	at java.base/java.lang.String.<init>(String.java:1435)
 
-	at sinking_ships.view.MainView.getUserInput(MainView.java:67)
+	at sinkingships.view.MainView.getUserInput(MainView.java:67)
 
-	at sinking_ships.view.mainViewTest.lambda$shouldBeAbleToCollectInputfromUser$1(mainViewTest.java:112)
+	at sinkingships.view.mainViewTest.lambda$shouldBeAbleToCollectInputfromUser$1(mainViewTest.java:112)
 
 	at java.base/java.lang.Thread.run(Thread.java:1623)
 

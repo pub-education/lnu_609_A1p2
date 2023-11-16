@@ -1,7 +1,9 @@
-package sinking_ships.view;
+package sinkingships.view;
 
-import sinking_ships.model.Board;
-import sinking_ships.model.Cell;
+import sinkingships.customexception.InvalidInputException;
+import sinkingships.customexception.InvalidRotationException;
+import sinkingships.model.Board;
+import sinkingships.model.Cell;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -79,18 +81,25 @@ public class MainView {
     int attempts = 0;
     while (attempts < 3) {
       String input = getUserInput();
-      if (input == null || input.equals("")) {
-        break;
-      }
-      input = input.toUpperCase();
-      if (input.matches(regex)) {
+      try {
+        checkInput(input, regex, allowed);
         return input;
-      } else {
-        out.println("Invalid input! " + allowed + " Try again:");
+      } catch (Exception e) {
+        displayMessage(e.getMessage());
       }
       attempts++;
     }
     throw new RuntimeException("Too many invalid inputs! Sleep on it!");
+  }
+
+  protected void checkInput(String input, String regex, String allowed) throws InvalidInputException {
+    if (input == null || input.equals("")) {
+      throw new InvalidInputException(allowed);
+    }
+    input = input.toUpperCase();
+    if (!input.matches(regex)) {
+      throw new InvalidInputException(allowed);
+    }
   }
 
   public void displayAttackResult(Board.Result result) {
@@ -116,5 +125,30 @@ public class MainView {
     setCursorPosition(1, 1);
     displayMessage("Goodbye!");
     pressEnterToContinue();
+  }
+
+  public Board.Rotation getUserInputRotation () {
+    displayMessage("Enter rotation:\n 1 = North\n 2 = West\n 3 = South\n 4 = East\n): ");
+    int attempts = 0;
+    while (attempts < 4) {
+      String input = getUserInput();
+      try {
+        checkInput(input, "^[1-4]$", "1-4");
+        attempts++;
+        switch (input) {
+          case "1":
+            return Board.Rotation.NORTH;
+          case "2":
+            return Board.Rotation.WEST;
+          case "3":
+            return Board.Rotation.SOUTH;
+          case "4":
+            return Board.Rotation.EAST;
+        }
+      } catch (Exception e) {
+        displayMessage(e.getMessage());
+      }
+    }
+    return Board.Rotation.NONE;
   }
 }

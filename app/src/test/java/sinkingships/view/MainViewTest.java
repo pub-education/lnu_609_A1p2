@@ -1,4 +1,4 @@
-package sinking_ships.view;
+package sinkingships.view;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -11,13 +11,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import sinking_ships.model.Board;
-import sinking_ships.model.Cell;
+import sinkingships.model.Board;
+import sinkingships.model.Cell;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class mainViewTest {
+public class MainViewTest {
 
   private PrintStream printstream;
   private InputStream inputStream;
@@ -158,9 +158,9 @@ public class mainViewTest {
     String simulatedUserInput = "1\n";
     InputStream inputStream = new ByteArrayInputStream(simulatedUserInput.getBytes());
     MainView mainView = new MainView(printstream, inputStream);
-    String actual = mainView.getUserInputRotation();
-    verify(printstream).println("Enter rotation (1 = North, 2 = West, 3 = South, 4 = East): ");
-    Assertions.assertEquals("1", actual);
+    Board.Rotation actual = mainView.getUserInputRotation();
+    verify(printstream).println("Enter rotation:\n 1 = North\n 2 = West\n 3 = South\n 4 = East\n): ");
+    Assertions.assertEquals(Board.Rotation.NORTH, actual);
   }
 
   // Should be able to present a winner either by player or computer (passed as object-copy).

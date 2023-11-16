@@ -56,7 +56,6 @@ spotbugsTest {
 jacoco {
   toolVersion = jacocoVersion
   reportsDirectory = layout.buildDirectory.dir("reports/jacoco")
-  // reportsDirectory = layout.buildDirectory.dir("reports/jacoco")
 }
 
 test {
@@ -67,7 +66,7 @@ jacocoTestReport {
   reports {
     xml.required = false
     csv.required = false
-    html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    html.outputLocation = layout.buildDirectory.dir('reports/jacoco')
   }
 }
 
@@ -92,7 +91,7 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = 'sinking_ships.App'
+    mainClass = 'sinkingships.App'
 }
 
 tasks.named('test') {
