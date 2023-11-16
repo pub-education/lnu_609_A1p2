@@ -91,7 +91,7 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = 'sinking_ships.App'
+    mainClass = 'sinkingships.App'
 }
 
 tasks.named('test') {

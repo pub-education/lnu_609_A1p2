@@ -1,4 +1,4 @@
-package sinking_ships.model;
+package sinkingships.model;
 
 public class Board {
   public enum Result {
