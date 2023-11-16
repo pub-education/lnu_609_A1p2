@@ -141,7 +141,6 @@ public class mainViewTest {
     Assertions.assertEquals("A1", actual);
   }
 
-  // Should be able to present result of hit, miss, or hit and sunk by taking an enum value as arg and present a suitable text.
   @Test
   public void displayEnumText_shouldBeAbleToDisplayMessageMatchedWithEnumValue() {
     mainView.displayAttackResult(Board.Result.HIT);
@@ -162,4 +161,9 @@ public class mainViewTest {
   // Should be able to say goodbye to the player on quit.
 
   // should be able to place cursor at a given coordinate on the screen.
+  @Test
+  public void shouldBeAbleToPlaceCursorAtGivenCoordinate() {
+    mainView.placeCursorAt(1, 1);
+    verify(printstream).printf("\033[%d;%dH", 2, 2);
+  }
 }
