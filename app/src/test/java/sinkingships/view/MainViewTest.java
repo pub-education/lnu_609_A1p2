@@ -10,15 +10,16 @@ import java.io.PrintStream;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import sinkingships.controller.Player;
 import sinkingships.model.Board;
 import sinkingships.model.Cell;
 import sinkingships.model.ModelPlayer;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+/**
+ * Unit test for the MainView class.
+ */
 public class MainViewTest {
 
   private PrintStream printStream;
@@ -27,6 +28,10 @@ public class MainViewTest {
   private PipedOutputStream pos;
   private PipedInputStream pis;
 
+  /**
+   * Set up the test fixture.
+   * @throws IOException
+   */
   @BeforeEach
   public void setUp() throws IOException {
     this.printStream = mock(PrintStream.class);
@@ -54,17 +59,17 @@ public class MainViewTest {
     Cell[][] mockBoardArray = createMockBoardArray(10, 10);
     String actual = mainView.boardArrayToString(mockBoardArray);
     String expected =
-     "   1  2  3  4  5  6  7  8  9  10  \n" +
-     "A  -  -  -  -  -  -  -  -  -  -  \n" +
-     "B  -  -  -  -  -  -  -  -  -  -  \n" +
-     "C  -  -  -  -  -  -  -  -  -  -  \n" +
-     "D  -  -  -  -  -  -  -  -  -  -  \n" +
-     "E  -  -  -  -  -  -  -  -  -  -  \n" +
-     "F  -  -  -  -  -  -  -  -  -  -  \n" +
-     "G  -  -  -  -  -  -  -  -  -  -  \n" +
-     "H  -  -  -  -  -  -  -  -  -  -  \n" +
-     "I  -  -  -  -  -  -  -  -  -  -  \n" +
-     "J  -  -  -  -  -  -  -  -  -  -  \n";
+        "   1  2  3  4  5  6  7  8  9  10  \n"
+      + "A  -  -  -  -  -  -  -  -  -  -  \n"
+      + "B  -  -  -  -  -  -  -  -  -  -  \n"
+      + "C  -  -  -  -  -  -  -  -  -  -  \n"
+      + "D  -  -  -  -  -  -  -  -  -  -  \n"
+      + "E  -  -  -  -  -  -  -  -  -  -  \n"
+      + "F  -  -  -  -  -  -  -  -  -  -  \n"
+      + "G  -  -  -  -  -  -  -  -  -  -  \n"
+      + "H  -  -  -  -  -  -  -  -  -  -  \n"
+      + "I  -  -  -  -  -  -  -  -  -  -  \n"
+      + "J  -  -  -  -  -  -  -  -  -  -  \n";
 
     assertEquals(expected, actual);
   }
@@ -98,21 +103,22 @@ public class MainViewTest {
   // Consider doing this as a manual test instead.
   // It depends on simulated user input and may be flaky.
   @Test
-  public void mainViewShouldBeAbleToPressEnterToContinue() throws IOException, InterruptedException {
-      MainView mainView = new MainView(printStream, pis);
-      Thread thread = new Thread(()-> {
-        try {
-          mainView.pressEnterToContinue();
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-      });
-      thread.start();
-      pos.write("\n".getBytes());
-      pos.flush();
-      pos.close();
-      Thread.sleep(1000);
-      verify(printStream, atLeastOnce()).println("Press enter to continue...");
+  public void mainViewShouldBeAbleToPressEnterToContinue()
+    throws IOException, InterruptedException {
+    MainView mainView = new MainView(printStream, pis);
+    Thread thread = new Thread(() -> {
+      try {
+        mainView.pressEnterToContinue();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    });
+    thread.start();
+    pos.write("\n".getBytes());
+    pos.flush();
+    pos.close();
+    Thread.sleep(1000);
+    verify(printStream, atLeastOnce()).println("Press enter to continue...");
   }
 
   // Consider doing this as a manual test instead.
@@ -121,7 +127,7 @@ public class MainViewTest {
   public void shouldBeAbleToCollectInputfromUser() throws IOException {
     MainView mainView = new MainView(printStream, pis);
     new Thread(() -> {
-        mainView.getUserInput();
+      mainView.getUserInput();
     }).start();
     pos.write("A1".getBytes());
     pos.flush();
@@ -159,7 +165,8 @@ public class MainViewTest {
     InputStream inputStream = new ByteArrayInputStream(simulatedUserInput.getBytes());
     MainView mainView = new MainView(printStream, inputStream);
     Board.Rotation actual = mainView.getUserInputRotation();
-    verify(printStream).println("Enter rotation:\n 1 = North\n 2 = West\n 3 = South\n 4 = East\n): ");
+    verify(printStream).println(
+      "Enter rotation:\n 1 = North\n 2 = West\n 3 = South\n 4 = East\n): ");
     Assertions.assertEquals(Board.Rotation.NORTH, actual);
   }
 
@@ -178,7 +185,7 @@ public class MainViewTest {
     verify(printStream).println("ComputerPlayer won!");
   }
 
-   @Test
+  @Test
   public void shouldBeAbleToCollectDecisionFromUser() {
     String simulatedUserInput = "P\n";
     InputStream inputStream = new ByteArrayInputStream(simulatedUserInput.getBytes());

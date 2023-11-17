@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
  * Unit test for the Board class.
  */
 public class BoardTest {
-  
-    //   @Test
-    // void boardExists() {
-    //     Board classUnderTest = new Board();
-    //     assertNotNull(classUnderTest, "Class should exist!");
-    // }
+
+  @Test
+  public void boardExists() {
+    Board classUnderTest = new Board();
+    assertNotNull(classUnderTest, "Class should exist!");
+  }
 }
