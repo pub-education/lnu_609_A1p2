@@ -140,3 +140,23 @@ tasks.withType(Checkstyle) {
         }
     }
 }
+
+tasks.withType(org.gradle.api.tasks.compile.JavaCompile) {
+    doLast {
+        if (hasProperty('spotbugs') && spotbugs.enabled) {
+            spotbugsMain {
+                // SpotBugs task configuration
+            }
+
+            def xmlReportFile = file("$buildDir/reports/spotbugs/main.xml") // Adjust the path as per your project structure
+            def xml = new groovy.xml.XmlSlurper().parse(xmlReportFile)
+
+            def errors = xml.bugInstance.count { it.@priority.text() <= 2 } // Assuming priority 1 and 2 as errors
+            def warnings = xml.bugInstance.count { it.@priority.text() > 2 } // Assuming priority 3 and above as warnings
+
+            if (errors > maxErrors || warnings > maxWarnings) {
+                throw new GradleException("SpotBugs violation limits exceeded: maxErrors=$maxErrors, maxWarnings=$maxWarnings")
+            }
+        }
+    }
+}
