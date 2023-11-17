@@ -1,9 +1,9 @@
 package sinkingships.view;
 
 import sinkingships.customexception.InvalidInputException;
-import sinkingships.customexception.InvalidRotationException;
 import sinkingships.model.Board;
 import sinkingships.model.Cell;
+import sinkingships.model.ModelPlayer;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -171,5 +171,9 @@ public class MainView {
       }
     }
     return false;
+  }
+
+  public void displayWinner(ModelPlayer player) {
+    displayMessage(player.getName() + " won!");
   }
 }

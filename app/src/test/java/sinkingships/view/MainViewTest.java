@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import sinkingships.controller.Player;
 import sinkingships.model.Board;
 import sinkingships.model.Cell;
+import sinkingships.model.ModelPlayer;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -169,10 +170,12 @@ public class MainViewTest {
     String simulatedUserInput = "1\n";
     InputStream inputStream = new ByteArrayInputStream(simulatedUserInput.getBytes());
     MainView mainView = new MainView(printStream, inputStream);
-    Player player1 = new Player("HumanPlayer");
+    ModelPlayer player1 = mock(ModelPlayer.class);
+    when(player1.getName()).thenReturn("HumanPlayer");
     mainView.displayWinner(player1);
     verify(printStream).println("HumanPlayer won!");
-    Player player2 = new Player("ComputerPlayer");
+    ModelPlayer player2 = mock(ModelPlayer.class);
+    when(player2.getName()).thenReturn("ComputerPlayer");
     mainView.displayWinner(player2);
     verify(printStream).println("ComputerPlayer won!");
   }
