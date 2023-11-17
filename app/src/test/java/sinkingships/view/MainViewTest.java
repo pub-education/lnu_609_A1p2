@@ -19,6 +19,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import sinkingships.controller.Player;
 import sinkingships.model.ShotResponse;
+import sinkingships.model.Board;
 import sinkingships.model.Cell;
 import sinkingships.model.ModelPlayer;
 
@@ -156,11 +157,11 @@ public class MainViewTest {
   @Test
   public void displayEnumText_shouldBeAbleToDisplayMessageMatchedWithEnumValue() {
     mainView.displayAttackResult(ShotResponse.HIT);
-    verify(printstream).println("Hit!");
+    verify(printStream).println("Hit!");
     mainView.displayAttackResult(ShotResponse.MISS);
-    verify(printstream).println("Miss!");
+    verify(printStream).println("Miss!");
     mainView.displayAttackResult(ShotResponse.HIT_AND_SUNK);
-    verify(printstream).println("Hit and sunk!");
+    verify(printStream).println("Hit and sunk!");
   }
 
   // Should be able to Collect a rotation from user and return a corresponding enum value

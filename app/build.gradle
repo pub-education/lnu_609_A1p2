@@ -29,6 +29,9 @@ ext {
 checkstyle {
     toolVersion = checkstyleVersion
     configFile = rootProject.file("config/checkstyle/google_checks.xml")
+
+    maxWarnings = 3
+    maxErrors = 0
 }
 
 spotbugsMain {
@@ -116,6 +119,43 @@ tasks.named('test') {
             outputFile.parentFile.mkdirs() // Create directories if they don't exist
             outputFile.withWriterAppend { writer ->
                 writer.write("${event.message}\n")
+            }
+        }
+    }
+}
+
+tasks.withType(Checkstyle) {
+    // Failing the build on violation
+    doLast {
+        // Define the path to the XML report file
+        def xmlReportFile = file("$buildDir/reports/checkstyle/main.xml") // Update the path as per your project structure
+
+        // Read the file and count errors and warnings
+        def reportContent = xmlReportFile.text
+        def errors = reportContent.findAll(/<error [^>]*severity="error"/)
+        def warnings = reportContent.findAll(/<error [^>]*severity="warning"/)
+
+        if (errors.size() > maxErrors || warnings.size() > maxWarnings) {
+            throw new GradleException("Checkstyle violation limits exceeded: maxErrors=$maxErrors, maxWarnings=$maxWarnings")
+        }
+    }
+}
+
+tasks.withType(org.gradle.api.tasks.compile.JavaCompile) {
+    doLast {
+        if (hasProperty('spotbugs') && spotbugs.enabled) {
+            spotbugsMain {
+                // SpotBugs task configuration
+            }
+
+            def xmlReportFile = file("$buildDir/reports/spotbugs/main.xml") // Adjust the path as per your project structure
+            def xml = new groovy.xml.XmlSlurper().parse(xmlReportFile)
+
+            def errors = xml.bugInstance.count { it.@priority.text() <= 2 } // Assuming priority 1 and 2 as errors
+            def warnings = xml.bugInstance.count { it.@priority.text() > 2 } // Assuming priority 3 and above as warnings
+
+            if (errors > maxErrors || warnings > maxWarnings) {
+                throw new GradleException("SpotBugs violation limits exceeded: maxErrors=$maxErrors, maxWarnings=$maxWarnings")
             }
         }
     }
