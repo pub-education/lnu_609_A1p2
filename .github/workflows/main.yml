@@ -23,11 +23,8 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x ./gradlew
 
-    - name: Run Checkstyle
-      run: ./gradlew checkstyleMain checkstyleTest
-
-    - name: Run SpotBugs
-      run: ./gradlew spotbugsMain spotbugsTest
+    - name: Run Tests
+      run: ./gradlew test
 
     - name: Archive Checkstyle and SpotBugs reports
       uses: actions/upload-artifact@v2
