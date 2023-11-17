@@ -151,4 +151,25 @@ public class MainView {
     }
     return Board.Rotation.NONE;
   }
+
+  public boolean getUserInputPlayAgainOrQuit() {
+    displayMessage("Would you like to:\n P = Play again?\n Q = Quit\n");
+    int attempts = 0;
+    while (attempts < 3) {
+      String input = getUserInput();
+      try {
+        checkInput(input, "^[PQ]$", "P or Q");
+        attempts++;
+        switch (input) {
+          case "P":
+            return true;
+          case "Q":
+            return false;
+        }
+      } catch (Exception e) {
+        displayMessage(e.getMessage());
+      }
+    }
+    return false;
+  }
 }
