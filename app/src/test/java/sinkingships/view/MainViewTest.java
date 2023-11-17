@@ -1,12 +1,19 @@
 package sinkingships.view;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintStream;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,8 +21,6 @@ import sinkingships.controller.Player;
 import sinkingships.model.Board;
 import sinkingships.model.Cell;
 import sinkingships.model.ModelPlayer;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 /**
  * Unit test for the MainView class.
@@ -30,7 +35,8 @@ public class MainViewTest {
 
   /**
    * Set up the test fixture.
-   * @throws IOException
+   *
+   * @throws IOException if an I/O error occurs.
    */
   @BeforeEach
   public void setUp() throws IOException {
@@ -59,17 +65,17 @@ public class MainViewTest {
     Cell[][] mockBoardArray = createMockBoardArray(10, 10);
     String actual = mainView.boardArrayToString(mockBoardArray);
     String expected =
-        "   1  2  3  4  5  6  7  8  9  10  \n"
-      + "A  -  -  -  -  -  -  -  -  -  -  \n"
-      + "B  -  -  -  -  -  -  -  -  -  -  \n"
-      + "C  -  -  -  -  -  -  -  -  -  -  \n"
-      + "D  -  -  -  -  -  -  -  -  -  -  \n"
-      + "E  -  -  -  -  -  -  -  -  -  -  \n"
-      + "F  -  -  -  -  -  -  -  -  -  -  \n"
-      + "G  -  -  -  -  -  -  -  -  -  -  \n"
-      + "H  -  -  -  -  -  -  -  -  -  -  \n"
-      + "I  -  -  -  -  -  -  -  -  -  -  \n"
-      + "J  -  -  -  -  -  -  -  -  -  -  \n";
+          "   1  2  3  4  5  6  7  8  9  10  \n"
+        + "A  -  -  -  -  -  -  -  -  -  -  \n"
+        + "B  -  -  -  -  -  -  -  -  -  -  \n"
+        + "C  -  -  -  -  -  -  -  -  -  -  \n"
+        + "D  -  -  -  -  -  -  -  -  -  -  \n"
+        + "E  -  -  -  -  -  -  -  -  -  -  \n"
+        + "F  -  -  -  -  -  -  -  -  -  -  \n"
+        + "G  -  -  -  -  -  -  -  -  -  -  \n"
+        + "H  -  -  -  -  -  -  -  -  -  -  \n"
+        + "I  -  -  -  -  -  -  -  -  -  -  \n"
+        + "J  -  -  -  -  -  -  -  -  -  -  \n";
 
     assertEquals(expected, actual);
   }
@@ -104,7 +110,7 @@ public class MainViewTest {
   // It depends on simulated user input and may be flaky.
   @Test
   public void mainViewShouldBeAbleToPressEnterToContinue()
-    throws IOException, InterruptedException {
+      throws IOException, InterruptedException {
     MainView mainView = new MainView(printStream, pis);
     Thread thread = new Thread(() -> {
       try {
@@ -166,7 +172,7 @@ public class MainViewTest {
     MainView mainView = new MainView(printStream, inputStream);
     Board.Rotation actual = mainView.getUserInputRotation();
     verify(printStream).println(
-      "Enter rotation:\n 1 = North\n 2 = West\n 3 = South\n 4 = East\n): ");
+        "Enter rotation:\n 1 = North\n 2 = West\n 3 = South\n 4 = East\n): ");
     Assertions.assertEquals(Board.Rotation.NORTH, actual);
   }
 
