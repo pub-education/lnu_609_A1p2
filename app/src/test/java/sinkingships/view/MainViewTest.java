@@ -163,8 +163,6 @@ public class MainViewTest {
     Assertions.assertEquals(Board.Rotation.NORTH, actual);
   }
 
-  // Should be able to present a winner either by player or computer (passed as object-copy).
-  // pointless at this stage but could be used to extract game statistics.
   @Test
   public void shouldBeAbleToDisplayWinner() {
     String simulatedUserInput = "1\n";
@@ -180,8 +178,7 @@ public class MainViewTest {
     verify(printStream).println("ComputerPlayer won!");
   }
 
-  // Should be able to collect decision on whether to play again or quit.
-  @Test
+   @Test
   public void shouldBeAbleToCollectDecisionFromUser() {
     String simulatedUserInput = "P\n";
     InputStream inputStream = new ByteArrayInputStream(simulatedUserInput.getBytes());
