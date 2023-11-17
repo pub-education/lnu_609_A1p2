@@ -27,7 +27,7 @@ jobs:
       run: ./gradlew test
 
     - name: Run Checkstyle
-      run: ./gradlew checkstyle
+      run: ./gradlew checkstyleMain
 
     - name: Run SpotBugs
       run: ./gradlew spotbugsMain spotbugsTest
