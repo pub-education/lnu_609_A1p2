@@ -29,6 +29,9 @@ ext {
 checkstyle {
     toolVersion = checkstyleVersion
     configFile = rootProject.file("config/checkstyle/google_checks.xml")
+
+    maxWarnings = 3
+    maxErrors = 0
 }
 
 spotbugsMain {
@@ -117,6 +120,20 @@ tasks.named('test') {
             outputFile.withWriterAppend { writer ->
                 writer.write("${event.message}\n")
             }
+        }
+    }
+}
+
+tasks.withType(Checkstyle) {
+    
+
+    // Failing the build on violation
+    doLast {
+        def errors = reports.xml.destination.readLines().findAll { it.contains('<error ') }
+        def warnings = reports.xml.destination.readLines().findAll { it.contains('severity="warning"') }
+
+        if (errors.size() > maxErrors || warnings.size() > maxWarnings) {
+            throw new GradleException("Checkstyle violation limits exceeded: maxErrors=$maxErrors, maxWarnings=$maxWarnings")
         }
     }
 }

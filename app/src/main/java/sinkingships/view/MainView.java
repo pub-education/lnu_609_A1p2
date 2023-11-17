@@ -5,6 +5,7 @@ import java.io.PrintStream;
 import sinkingships.customexception.InvalidInputException;
 import sinkingships.model.Board;
 import sinkingships.model.Cell;
+import sinkingships.model.ModelPlayer;
 import sinkingships.model.ShotResponse;
 
 /**
@@ -120,10 +121,10 @@ public class MainView {
   /**
    * Displays a message to the user that the attack was a hit, miss or sunk.
    *
-   * @param result result of the attack
+   * @param hit result of the attack
    */
-  public void displayAttackResult(Board.Result result) {
-    switch (result) {
+  public void displayAttackResult(ShotResponse hit) {
+    switch (hit) {
       case HIT:
         displayMessage("Hit!");
         break;
