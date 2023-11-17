@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import sinkingships.controller.Player;
 import sinkingships.model.Board;
 import sinkingships.model.Cell;
 
@@ -163,6 +164,18 @@ public class MainViewTest {
 
   // Should be able to present a winner either by player or computer (passed as object-copy).
   // pointless at this stage but could be used to extract game statistics.
+  @Test
+  public void shouldBeAbleToDisplayWinner() {
+    String simulatedUserInput = "1\n";
+    InputStream inputStream = new ByteArrayInputStream(simulatedUserInput.getBytes());
+    MainView mainView = new MainView(printStream, inputStream);
+    Player player1 = new Player("HumanPlayer");
+    mainView.displayWinner(player1);
+    verify(printStream).println("HumanPlayer won!");
+    Player player2 = new Player("ComputerPlayer");
+    mainView.displayWinner(player2);
+    verify(printStream).println("ComputerPlayer won!");
+  }
 
   // Should be able to collect decision on whether to play again or quit.
   @Test
