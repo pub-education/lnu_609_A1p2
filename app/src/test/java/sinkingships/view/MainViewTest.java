@@ -1,6 +1,12 @@
 package sinkingships.view;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -8,29 +14,36 @@ import java.io.InputStream;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintStream;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import sinkingships.controller.Player;
 import sinkingships.model.ShotResponse;
 import sinkingships.model.Cell;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import sinkingships.model.ModelPlayer;
 
 /**
  * Unit test for the MainView class.
  */
 public class MainViewTest {
-  private PrintStream printstream;
+  private PrintStream printStream;
   private InputStream inputStream;
   private MainView mainView;
+  private PipedOutputStream pos;
+  private PipedInputStream pis;
 
+  /**
+   * Set up the test fixture.
+   *
+   * @throws IOException if an I/O error occurs.
+   */
   @BeforeEach
-  public void setUp() {
-    this.printstream = mock(PrintStream.class);
+  public void setUp() throws IOException {
+    this.printStream = mock(PrintStream.class);
     this.inputStream = mock(InputStream.class);
-    this.mainView = new MainView(printstream, inputStream);
+    this.mainView = new MainView(printStream, inputStream);
+    this.pos = new PipedOutputStream();
+    this.pis = new PipedInputStream(pos);
   }
 
   @Test
@@ -43,7 +56,7 @@ public class MainViewTest {
     String message = "Hello World!";
     String expected = message;
     mainView.displayMessage(message);
-    verify(printstream, atLeastOnce()).println(expected);
+    verify(printStream, atLeastOnce()).println(expected);
   }
 
   @Test
@@ -51,17 +64,17 @@ public class MainViewTest {
     Cell[][] mockBoardArray = createMockBoardArray(10, 10);
     String actual = mainView.boardArrayToString(mockBoardArray);
     String expected =
-     "   1  2  3  4  5  6  7  8  9  10  \n" +
-     "A  -  -  -  -  -  -  -  -  -  -  \n" +
-     "B  -  -  -  -  -  -  -  -  -  -  \n" +
-     "C  -  -  -  -  -  -  -  -  -  -  \n" +
-     "D  -  -  -  -  -  -  -  -  -  -  \n" +
-     "E  -  -  -  -  -  -  -  -  -  -  \n" +
-     "F  -  -  -  -  -  -  -  -  -  -  \n" +
-     "G  -  -  -  -  -  -  -  -  -  -  \n" +
-     "H  -  -  -  -  -  -  -  -  -  -  \n" +
-     "I  -  -  -  -  -  -  -  -  -  -  \n" +
-     "J  -  -  -  -  -  -  -  -  -  -  \n";
+          "   1  2  3  4  5  6  7  8  9  10  \n"
+        + "A  -  -  -  -  -  -  -  -  -  -  \n"
+        + "B  -  -  -  -  -  -  -  -  -  -  \n"
+        + "C  -  -  -  -  -  -  -  -  -  -  \n"
+        + "D  -  -  -  -  -  -  -  -  -  -  \n"
+        + "E  -  -  -  -  -  -  -  -  -  -  \n"
+        + "F  -  -  -  -  -  -  -  -  -  -  \n"
+        + "G  -  -  -  -  -  -  -  -  -  -  \n"
+        + "H  -  -  -  -  -  -  -  -  -  -  \n"
+        + "I  -  -  -  -  -  -  -  -  -  -  \n"
+        + "J  -  -  -  -  -  -  -  -  -  -  \n";
 
     assertEquals(expected, actual);
   }
@@ -83,46 +96,43 @@ public class MainViewTest {
     Cell[][] mockBoardArray = createMockBoardArray(10, 10);
     mainView.displayBoard(mockBoardArray);
     String expectedBoardString = mainView.boardArrayToString(mockBoardArray);
-    verify(printstream, atLeastOnce()).println(expectedBoardString);
+    verify(printStream, atLeastOnce()).println(expectedBoardString);
   }
 
   @Test
   public void mainViewShouldBeAbleToClearScreen() {
     mainView.clearScreen();
-    verify(printstream, times(50)).println();
+    verify(printStream, times(50)).println();
   }
 
   // Consider doing this as a manual test instead.
   // It depends on simulated user input and may be flaky.
   @Test
-  public void mainViewShouldBeAbleToPressEnterToContinue() throws IOException, InterruptedException {
-      PipedOutputStream pos = new PipedOutputStream();
-      PipedInputStream pis = new PipedInputStream(pos);
-      MainView mainView = new MainView(printstream, pis);
-      Thread thread = new Thread(()-> {
-        try {
-          mainView.pressEnterToContinue();
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-      });
-      thread.start();
-      pos.write("\n".getBytes());
-      pos.flush();
-      pos.close();
-      Thread.sleep(1000);
-      verify(printstream, atLeastOnce()).println("Press enter to continue...");
+  public void mainViewShouldBeAbleToPressEnterToContinue()
+      throws IOException, InterruptedException {
+    MainView mainView = new MainView(printStream, pis);
+    Thread thread = new Thread(() -> {
+      try {
+        mainView.pressEnterToContinue();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    });
+    thread.start();
+    pos.write("\n".getBytes());
+    pos.flush();
+    pos.close();
+    Thread.sleep(1000);
+    verify(printStream, atLeastOnce()).println("Press enter to continue...");
   }
 
   // Consider doing this as a manual test instead.
   // It depends on simulated user input and may be flaky.
   @Test
   public void shouldBeAbleToCollectInputfromUser() throws IOException {
-    PipedOutputStream pos = new PipedOutputStream();
-    PipedInputStream pis = new PipedInputStream(pos);
-    MainView mainView = new MainView(printstream, pis);
+    MainView mainView = new MainView(printStream, pis);
     new Thread(() -> {
-        mainView.getUserInput();
+      mainView.getUserInput();
     }).start();
     pos.write("A1".getBytes());
     pos.flush();
@@ -134,13 +144,12 @@ public class MainViewTest {
 
   @Test
   public void shouldBeAbleToCollectValidCoordinateFromUser() {
-    PrintStream printstream = mock(PrintStream.class);
     String simulatedUserInput = "A1\n";
     InputStream inputStream = new ByteArrayInputStream(simulatedUserInput.getBytes());
-    MainView mainView = new MainView(printstream, inputStream);
+    MainView mainView = new MainView(printStream, inputStream);
     String regex = "^[A-J][1-9]$";
     String actual = mainView.getUserInputCoordinates(regex, "Only A1-J9 is allowed");
-    verify(printstream).println("Enter coordinate: ");
+    verify(printStream).println("Enter coordinate: ");
     Assertions.assertEquals("A1", actual);
   }
 
@@ -155,21 +164,51 @@ public class MainViewTest {
   }
 
   // Should be able to Collect a rotation from user and return a corresponding enum value
+  @Test
+  public void shouldBeAbleToCollectRotationFromUser() {
+    String simulatedUserInput = "1\n";
+    InputStream inputStream = new ByteArrayInputStream(simulatedUserInput.getBytes());
+    MainView mainView = new MainView(printStream, inputStream);
+    Board.Rotation actual = mainView.getUserInputRotation();
+    verify(printStream).println(
+        "Enter rotation:\n 1 = North\n 2 = West\n 3 = South\n 4 = East\n): ");
+    Assertions.assertEquals(Board.Rotation.NORTH, actual);
+  }
 
-  // Should be able to present a winner either by player or computer (passed as object-copy).
-  // pointless at this stage but could be used to extract game statistics.
+  @Test
+  public void shouldBeAbleToDisplayWinner() {
+    String simulatedUserInput = "1\n";
+    InputStream inputStream = new ByteArrayInputStream(simulatedUserInput.getBytes());
+    MainView mainView = new MainView(printStream, inputStream);
+    ModelPlayer player1 = mock(ModelPlayer.class);
+    when(player1.getName()).thenReturn("HumanPlayer");
+    mainView.displayWinner(player1);
+    verify(printStream).println("HumanPlayer won!");
+    ModelPlayer player2 = mock(ModelPlayer.class);
+    when(player2.getName()).thenReturn("ComputerPlayer");
+    mainView.displayWinner(player2);
+    verify(printStream).println("ComputerPlayer won!");
+  }
 
-  // Should be able to collect decision on whether to play again or quit.
+  @Test
+  public void shouldBeAbleToCollectDecisionFromUser() {
+    String simulatedUserInput = "P\n";
+    InputStream inputStream = new ByteArrayInputStream(simulatedUserInput.getBytes());
+    MainView mainView = new MainView(printStream, inputStream);
+    boolean actual = mainView.getUserInputPlayAgainOrQuit();
+    verify(printStream).println("Would you like to:\n P = Play again?\n Q = Quit\n");
+    Assertions.assertEquals(true, actual);
+  }
 
   @Test
   public void shouldBeAbleToDisplayGoodbyeMessage() {
     mainView.displayGoodbyeMessage();
-    verify(printstream).println("Goodbye!");
+    verify(printStream).println("Goodbye!");
   }
 
   @Test
   public void shouldBeAbleToPlaceCursorAtGivenCoordinate() {
     mainView.setCursorPosition(1, 1);
-    verify(printstream).printf("\033[%d;%dH", 2, 2);
+    verify(printStream).printf("\033[%d;%dH", 2, 2);
   }
 }

@@ -2,10 +2,14 @@ package sinkingships.view;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import sinkingships.customexception.InvalidInputException;
 import sinkingships.model.Board;
 import sinkingships.model.Cell;
 import sinkingships.model.ShotResponse;
 
+/**
+ * View class for the game.
+ */
 public class MainView {
 
   private PrintStream out;
@@ -22,14 +26,13 @@ public class MainView {
 
   protected String boardArrayToString(Cell[][] boardArray) {
     StringBuilder boardString = new StringBuilder();
-    int height = boardArray.length;
     int width = boardArray[0].length;
     boardString.append("   ");
     for (int x = 1; x <= width; x++) {
       boardString.append(x + "  ");
     }
     boardString.append("\n");
-
+    int height = boardArray.length;
     for (int y = height - 1; y >= 0; y--) {
       boardString.append((char) ('A' + (height - 1 - y))).append("  ");
       for (int x = 0; x < width; x++) {
@@ -45,12 +48,18 @@ public class MainView {
     displayMessage(boardString);
   }
 
+  /**
+   * Clears the screen.
+   */
   public void clearScreen() {
     for (int i = 0; i < 50; i++) {
-        out.println();
+      out.println();
     }
   }
 
+  /**
+   * Displays a message to the user and waits for user to press enter.
+   */
   public void pressEnterToContinue() {
     displayMessage("Press enter to continue...");
     try {
@@ -74,27 +83,47 @@ public class MainView {
     }
   }
 
+  /**
+   * Asks user for coordinates and validates input.
+   *
+   * @param regex regex to validate input
+   * @param allowed allowed characters
+   * @return validated input
+   */
   public String getUserInputCoordinates(String regex, String allowed) {
     displayMessage("Enter coordinate: ");
     int attempts = 0;
     while (attempts < 3) {
       String input = getUserInput();
-      if (input == null || input.equals("")) {
-        break;
-      }
-      input = input.toUpperCase();
-      if (input.matches(regex)) {
+      try {
+        checkInput(input, regex, allowed);
         return input;
-      } else {
-        out.println("Invalid input! " + allowed + " Try again:");
+      } catch (Exception e) {
+        displayMessage(e.getMessage());
       }
       attempts++;
     }
     throw new RuntimeException("Too many invalid inputs! Sleep on it!");
   }
 
-  public void displayAttackResult(ShotResponse hit) {
-    switch (hit) {
+  protected void checkInput(String input, String regex, String allowed)
+      throws InvalidInputException {
+    if (input == null || input.equals("")) {
+      throw new InvalidInputException(allowed);
+    }
+    input = input.toUpperCase();
+    if (!input.matches(regex)) {
+      throw new InvalidInputException(allowed);
+    }
+  }
+
+  /**
+   * Displays a message to the user that the attack was a hit, miss or sunk.
+   *
+   * @param result result of the attack
+   */
+  public void displayAttackResult(Board.Result result) {
+    switch (result) {
       case HIT:
         displayMessage("Hit!");
         break;
@@ -104,6 +133,8 @@ public class MainView {
       case HIT_AND_SUNK:
         displayMessage("Hit and sunk!");
         break;
+      default:
+        break;
     }
   }
 
@@ -111,10 +142,77 @@ public class MainView {
     out.printf("\033[%d;%dH", row + 1, col + 1);
   }
 
+  /**
+   * Displays a goodbye message and waits for user to press enter.
+   */
   public void displayGoodbyeMessage() {
     clearScreen();
     setCursorPosition(1, 1);
     displayMessage("Goodbye!");
     pressEnterToContinue();
+  }
+
+  /**
+   * Asks user for rotation and validates input.
+   *
+   * @return validated input
+   */
+  public Board.Rotation getUserInputRotation() {
+    displayMessage("Enter rotation:\n 1 = North\n 2 = West\n 3 = South\n 4 = East\n): ");
+    int attempts = 0;
+    while (attempts < 4) {
+      String input = getUserInput();
+      try {
+        checkInput(input, "^[1-4]$", "1-4");
+        attempts++;
+        switch (input) {
+          case "1":
+            return Board.Rotation.NORTH;
+          case "2":
+            return Board.Rotation.WEST;
+          case "3":
+            return Board.Rotation.SOUTH;
+          case "4":
+            return Board.Rotation.EAST;
+          default:
+            break;
+        }
+      } catch (Exception e) {
+        displayMessage(e.getMessage());
+      }
+    }
+    return Board.Rotation.NONE;
+  }
+
+  /**
+   * Asks user if they want to play again or quit.
+   *
+   * @return true if user wants to play again, false if user wants to quit.
+   */
+  public boolean getUserInputPlayAgainOrQuit() {
+    displayMessage("Would you like to:\n P = Play again?\n Q = Quit\n");
+    int attempts = 0;
+    while (attempts < 3) {
+      String input = getUserInput();
+      try {
+        checkInput(input, "^[PQ]$", "P or Q");
+        attempts++;
+        switch (input) {
+          case "P":
+            return true;
+          case "Q":
+            return false;
+          default:
+            break;
+        }
+      } catch (Exception e) {
+        displayMessage(e.getMessage());
+      }
+    }
+    return false;
+  }
+
+  public void displayWinner(ModelPlayer player) {
+    displayMessage(player.getName() + " won!");
   }
 }
