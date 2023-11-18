@@ -16,6 +16,6 @@ public class Board {
    * Rotation.
    */
   public enum Rotation {
-    NORTH, WEST, SOUTH, EAST, NONE
+   
   }
 }
