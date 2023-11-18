@@ -5,5 +5,6 @@ public enum Rotation {
   NORTH,
   WEST,
   SOUTH,
-  EAST;
+  EAST,
+  NONE;
 }
