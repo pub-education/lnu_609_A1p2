@@ -13,7 +13,7 @@ public class RotationTest {
     sut = Rotation.NORTH;
     
     assertTrue(sut == Rotation.NORTH);
-    assertEquals("North", sut);
+    assertEquals("North", sut.toString());
   }
 
   @Test
