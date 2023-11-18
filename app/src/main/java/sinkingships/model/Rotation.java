@@ -4,5 +4,6 @@ package sinkingships.model;
 public enum Rotation {
   NORTH,
   WEST,
-  SOUTH;
+  SOUTH,
+  EAST;
 }
