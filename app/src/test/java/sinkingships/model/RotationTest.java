@@ -34,4 +34,11 @@ public class RotationTest {
     
     assertTrue(sut == Rotation.EAST);
   }
+
+  @Test
+  public void testEnumComparisonNone() {
+    sut = Rotation.NONE;
+    
+    assertTrue(sut == Rotation.NONE);
+  }
 }
