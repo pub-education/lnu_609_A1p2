@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests for the Board class.
+ */
 public class BoardTest {
 
   @Test

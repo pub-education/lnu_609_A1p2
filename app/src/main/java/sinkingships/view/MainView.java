@@ -6,6 +6,7 @@ import sinkingships.customexception.InvalidInputException;
 import sinkingships.model.Board;
 import sinkingships.model.Cell;
 import sinkingships.model.ModelPlayer;
+import sinkingships.model.Rotation;
 import sinkingships.model.ShotResponse;
 
 /**
@@ -158,7 +159,7 @@ public class MainView {
    *
    * @return validated input
    */
-  public Board.Rotation getUserInputRotation() {
+  public Rotation getUserInputRotation() {
     displayMessage("Enter rotation:\n 1 = North\n 2 = West\n 3 = South\n 4 = East\n): ");
     int attempts = 0;
     while (attempts < 4) {
@@ -168,13 +169,13 @@ public class MainView {
         attempts++;
         switch (input) {
           case "1":
-            return Board.Rotation.NORTH;
+            return Rotation.NORTH;
           case "2":
-            return Board.Rotation.WEST;
+            return Rotation.WEST;
           case "3":
-            return Board.Rotation.SOUTH;
+            return Rotation.SOUTH;
           case "4":
-            return Board.Rotation.EAST;
+            return Rotation.EAST;
           default:
             break;
         }
@@ -182,7 +183,7 @@ public class MainView {
         displayMessage(e.getMessage());
       }
     }
-    return Board.Rotation.NONE;
+    return Rotation.NONE;
   }
 
   /**
