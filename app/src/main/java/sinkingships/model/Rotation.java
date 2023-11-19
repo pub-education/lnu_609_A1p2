@@ -1,6 +1,8 @@
 package sinkingships.model;
 
-//  NORTH, WEST, SOUTH, EAST, NONE
+/**
+ * Enum for the rotation of a ship.
+ */
 public enum Rotation {
   NORTH("North"),
   WEST("West"),
@@ -9,6 +11,7 @@ public enum Rotation {
   NONE("None");
 
   private final String direction;
+  
   Rotation(String direction) {
     this.direction = direction;
   }

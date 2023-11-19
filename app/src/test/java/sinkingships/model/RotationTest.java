@@ -1,10 +1,12 @@
 package sinkingships.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests for the Rotation enum.
+ */
 public class RotationTest {
   Rotation sut;
 
