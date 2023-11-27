@@ -1,21 +1,27 @@
 package sinkingships.model;
 
+import java.util.LinkedList;
+
 /**
  * Abstract class for a player.
  */
 public class Board {
-  
-  /**
-   * Attack Result.
-   */
-  public enum Result {
-    HIT, MISS, HIT_AND_SUNK
+  private LinkedList<ShipType> ships;
+
+  public Board() {
+    ships = new LinkedList<>();
+    loadShips();
   }
 
-  /**
-   * Rotation.
-   */
-  public enum Rotation {
-   
+  private void loadShips() {
+    ships.add(ShipType.CARRIER);
+    ships.add(ShipType.BATTLESHIP);
+    ships.add(ShipType.CRUISER);
+    ships.add(ShipType.SUBMARINE);
+    ships.add(ShipType.DESTROYER);
+  }
+
+  public LinkedList<ShipType> getShips() {
+    return new LinkedList<>(this.ships);
   }
 }
