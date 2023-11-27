@@ -1,6 +1,6 @@
 package sinkingships.model;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 public class BoardTest {
 
   @Test
-  public void boardExists() {
-    Board classUnderTest = new Board();
-    assertNotNull(classUnderTest, "Class should exist!");
+  public void shouldHaveFiveShipsAfterCreation() {
+    Board sut = new Board();
+    assertEquals(5, sut.getShips().size());
   }
 }
