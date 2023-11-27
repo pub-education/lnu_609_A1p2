@@ -6,7 +6,7 @@ public class Ship {
 	}
 
   public Object getShipType() {
-    return null;
+    return "Carrier";
   }
   
 }
