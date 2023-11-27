@@ -36,8 +36,11 @@ public class BoardTest {
 
     LinkedList<ShipType> internalShips = null;
     try {
+      // Using the reflection API to access the private field "ships" of the Board class.
       Field field = Board.class.getDeclaredField("ships");
+      // Making the private field "ships" accessible, so we can read it.
       field.setAccessible(true);
+      // Getting the value of the private field "ships" of the Board class and casting it to a LinkedList<ShipType>.
       internalShips = (LinkedList<ShipType>) field.get(sut);
 
       assertNotSame(internalShips, returnedShips, "The returned list should be a copy of the internal list.");
