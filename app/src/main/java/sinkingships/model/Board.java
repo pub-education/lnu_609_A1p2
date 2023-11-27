@@ -22,6 +22,6 @@ public class Board {
   }
 
   public LinkedList<ShipType> getShips() {
-    return this.ships;
+    return new LinkedList<>(this.ships);
   }
 }
