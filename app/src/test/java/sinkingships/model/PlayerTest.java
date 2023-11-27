@@ -11,7 +11,7 @@ public class PlayerTest {
 
   @Test
   void playerExists() {
-    Player sut = new Player();
+    Player sut = new Player("Kalle");
     assertNotNull(sut, "Class should exist!");
   }
 }

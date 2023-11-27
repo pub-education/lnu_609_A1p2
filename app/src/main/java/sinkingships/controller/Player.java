@@ -5,4 +5,6 @@ package sinkingships.controller;
  */
 public class Player {
 
+
+
 }
