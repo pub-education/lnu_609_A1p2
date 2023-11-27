@@ -12,7 +12,7 @@ public class ModelPlayerTest {
   
   @Test
   void modelPlayerClassExists() {
-    ModelPlayer classUnderTest = new HumanPlayer("Joe!");
-    assertNotNull(classUnderTest, "Class should exist!");
+    ModelPlayer sut = new HumanPlayer("Joe!");
+    assertNotNull(sut, "Class should exist!");
   }
 }

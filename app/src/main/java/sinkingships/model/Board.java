@@ -5,17 +5,4 @@ package sinkingships.model;
  */
 public class Board {
   
-  /**
-   * Attack Result.
-   */
-  public enum Result {
-    HIT, MISS, HIT_AND_SUNK
-  }
-
-  /**
-   * Rotation.
-   */
-  public enum Rotation {
-   
-  }
 }
