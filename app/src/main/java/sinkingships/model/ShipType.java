@@ -14,7 +14,8 @@ public enum ShipType {
   }
 
   public String getName() {
-    throw new UnsupportedOperationException();
+    return this.name;
+  }
 
   public int getSize() {
     throw new UnsupportedOperationException();
