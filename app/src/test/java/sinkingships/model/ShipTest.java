@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class ShipTest {
 
   @Test
-    void testShipTypeAndSize() {
+    public void testShipTypeAndSize() {
         // Test with each ShipType enum
         for (ShipType type : ShipType.values()) {
             Ship ship = new Ship(type);
