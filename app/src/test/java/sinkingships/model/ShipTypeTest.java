@@ -14,4 +14,10 @@ public class ShipTypeTest {
         assertEquals("Carrier", ShipType.CARRIER.getName());
         
     }
+
+  @Test
+    public void shouldGetTheSizeOfTheShipTypeCarrier() {
+        assertEquals(5, ShipType.CARRIER.getSize());
+        
+    }
 }
