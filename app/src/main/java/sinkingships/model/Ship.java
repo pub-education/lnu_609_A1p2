@@ -12,7 +12,7 @@ public class Ship {
   }
 
   public Integer getShipSize() {
-    return null;
+    return 5;
   }
   
 }
