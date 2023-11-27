@@ -7,14 +7,9 @@ import org.junit.jupiter.api.Test;
 public class ShipTest {
   
   @Test
-  public void shouldGetTheNameOfTheShipTypeCarrier() {
-    Ship sut = new Ship(ShipType.CARRIER);
-    assertEquals("Carrier", sut.getShipType());
-  } 
-
-  @Test
-  public void shouldGetTheNameOfTheShipTypeBattleship() {
-    Ship sut = new Ship(ShipType.BATTLESHIP);
-    assertEquals("Battleship", sut.getShipType());
-  } 
+  public void shouldGetTheNameOfTheShipType() {
+    ShipType shipType = ShipType.CARRIER;
+    Ship sut = new Ship(shipType);
+    assertEquals(shipType.getName(), sut.getShipType());
+  }
 }
