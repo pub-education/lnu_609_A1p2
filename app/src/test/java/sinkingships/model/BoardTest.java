@@ -1,6 +1,10 @@
 package sinkingships.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+
+import java.lang.reflect.Field;
+import java.util.LinkedList;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,4 +29,20 @@ public class BoardTest {
     assertEquals(ShipType.DESTROYER, sut.getShips().get(4));
   }
 
+  @Test
+  public void shouldNotReturnTheInternalShipList() {
+    Board sut = new Board();
+    LinkedList<ShipType> returnedShips = sut.getShips();
+
+    LinkedList<ShipType> internalShips = null;
+    try {
+      Field field = Board.class.getDeclaredField("ships");
+      field.setAccessible(true);
+      internalShips = (LinkedList<ShipType>) field.get(sut);
+
+      assertNotSame(internalShips, returnedShips, "The returned list should be a copy of the internal list.");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 }
