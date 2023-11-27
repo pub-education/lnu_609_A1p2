@@ -10,5 +10,9 @@ public class Ship {
   public String getShipType() {
     return this.shipType.getName();
   }
+
+  public Integer getShipSize() {
+    return null;
+  }
   
 }
