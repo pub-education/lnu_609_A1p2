@@ -3,8 +3,8 @@ package sinkingships.model;
 /**
  * Abstract class for a player.
  */
-public class HumanPlayer extends ModelPlayer {
-  public HumanPlayer(String name) {
+public class Computer extends Player {
+  public Computer(String name) {
     super(name);
   }
 }

@@ -17,10 +17,8 @@ import java.io.PrintStream;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import sinkingships.controller.Player;
-import sinkingships.model.Board;
+import sinkingships.model.Player;
 import sinkingships.model.Cell;
-import sinkingships.model.ModelPlayer;
 import sinkingships.model.ShotResponse;
 
 /**
@@ -181,11 +179,11 @@ public class MainViewTest {
     String simulatedUserInput = "1\n";
     InputStream inputStream = new ByteArrayInputStream(simulatedUserInput.getBytes());
     MainView mainView = new MainView(printStream, inputStream);
-    ModelPlayer player1 = mock(ModelPlayer.class);
+    Player player1 = mock(Player.class);
     when(player1.getName()).thenReturn("HumanPlayer");
     mainView.displayWinner(player1);
     verify(printStream).println("HumanPlayer won!");
-    ModelPlayer player2 = mock(ModelPlayer.class);
+    Player player2 = mock(Player.class);
     when(player2.getName()).thenReturn("ComputerPlayer");
     mainView.displayWinner(player2);
     verify(printStream).println("ComputerPlayer won!");

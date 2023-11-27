@@ -3,9 +3,8 @@ package sinkingships.view;
 import java.io.InputStream;
 import java.io.PrintStream;
 import sinkingships.customexception.InvalidInputException;
-import sinkingships.model.Board;
 import sinkingships.model.Cell;
-import sinkingships.model.ModelPlayer;
+import sinkingships.model.Player;
 import sinkingships.model.Rotation;
 import sinkingships.model.ShotResponse;
 
@@ -214,7 +213,7 @@ public class MainView {
     return false;
   }
 
-  public void displayWinner(ModelPlayer player) {
+  public void displayWinner(Player player) {
     displayMessage(player.getName() + " won!");
   }
 }
