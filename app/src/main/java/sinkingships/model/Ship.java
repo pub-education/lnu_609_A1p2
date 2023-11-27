@@ -7,7 +7,7 @@ public class Ship {
     this.shipType = shipType;
 	}
 
-  public Object getShipType() {
+  public String getShipType() {
     return this.shipType.getName();
   }
   

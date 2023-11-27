@@ -12,4 +12,6 @@ public class ShipTest {
     Ship sut = new Ship(shipType);
     assertEquals(shipType.getName(), sut.getShipType());
   }
+
+  
 }
