@@ -12,18 +12,18 @@ public class ShipTypeTest {
   @Test
     public void shouldGetTheNameOfTheShipTypeCarrier() {
         assertEquals("Carrier", ShipType.CARRIER.getName());
-        
+        assertEquals("Battleship", ShipType.BATTLESHIP.getName());
+        assertEquals("Cruiser", ShipType.CRUISER.getName());
+        assertEquals("Submarine", ShipType.SUBMARINE.getName());
+        assertEquals("Destroyer", ShipType.DESTROYER.getName());        
     }
 
   @Test
     public void shouldGetTheSizeOfTheShipTypeCarrier() {
         assertEquals(5, ShipType.CARRIER.getSize());
-        
-    }
-
-  @Test
-    public void shouldGetTheNameOfTheShipTypeBattleship() {
-        assertEquals("Battleship", ShipType.BATTLESHIP.getName());
-        
+        assertEquals(4, ShipType.BATTLESHIP.getSize());
+        assertEquals(3, ShipType.CRUISER.getSize());
+        assertEquals(3, ShipType.SUBMARINE.getSize());
+        assertEquals(2, ShipType.DESTROYER.getSize());        
     }
 }
