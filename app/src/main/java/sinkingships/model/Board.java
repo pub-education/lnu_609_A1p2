@@ -24,5 +24,4 @@ public class Board {
   public LinkedList<ShipType> getShips() {
     return this.ships;
   }
-  
 }

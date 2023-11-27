@@ -8,6 +8,11 @@ public abstract class ModelPlayer {
   private String name;
   private final int minNameLength = 1;
 
+  /**
+   * Constructor for a player.
+   *
+   * @param name The name of the player.
+   */
   public ModelPlayer(String name) {
     try {
       checkString(name);

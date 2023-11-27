@@ -1,11 +1,14 @@
 package sinkingships.model;
 
+/**
+ * Ship class.
+ */
 public class Ship {
   private ShipType shipType;
 
-	public Ship(ShipType shipType) {
+  public Ship(ShipType shipType) {
     this.shipType = shipType;
-	}
+  }
 
   public String getShipType() {
     return this.shipType.getName();
@@ -14,5 +17,5 @@ public class Ship {
   public Integer getShipSize() {
     return this.shipType.getSize();
   }
-  
+
 }
