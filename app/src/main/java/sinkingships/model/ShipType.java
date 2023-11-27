@@ -18,6 +18,6 @@ public enum ShipType {
   }
 
   public int getSize() {
-    throw new UnsupportedOperationException();
+    return this.size;
   }
 }
