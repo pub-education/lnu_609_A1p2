@@ -1,12 +1,14 @@
 package sinkingships.model;
 
 public class Ship {
+  private ShipType shipType;
 
-	public Ship(ShipType carrier) {
+	public Ship(ShipType shipType) {
+    this.shipType = shipType;
 	}
 
   public Object getShipType() {
-    return "Carrier";
+    return this.shipType.getName();
   }
   
 }
