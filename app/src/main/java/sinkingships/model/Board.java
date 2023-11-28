@@ -26,6 +26,6 @@ public class Board {
   }
 
   public Integer getMaxWidth() {
-    return null;
+    return 10;
   }
 }
