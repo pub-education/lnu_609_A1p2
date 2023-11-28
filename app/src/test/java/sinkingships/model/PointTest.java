@@ -76,7 +76,16 @@ public class PointTest {
 
   @Test 
   public void shouldReturnVerticalValue() {
-    Point sut = new Point('a', 2);
-    assertEquals(2, sut.getVerticalPosition());
+    int[] numbers = {0, 1, 2, 3, 4, 5, 7, 9, 11, 17, 23, 101};
+
+    try {
+      for (int i = 0; i < numbers.length; i++) {
+        Point sut = new Point('a', numbers[i]);
+        assertEquals(numbers[i], sut.getVerticalPosition());
+      }
+    } catch (Exception e) {
+      System.out.println(e);
+      assertFalse(true);
+    }
   }
 }
