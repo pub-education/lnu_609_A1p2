@@ -10,8 +10,14 @@ import org.junit.jupiter.api.Test;
 public class PointTest {
   
   @Test
-  public void shouldReturnHorizontalValue() {
+  public void shouldReturnHorizontalValueA() {
     Point sut = new Point('a', 2);
     assertEquals('a', sut.getHorizontalPosition());
+  }
+
+  @Test
+  public void shouldReturnHorizontalValueB() {
+    Point sut = new Point('b', 2);
+    assertEquals('b', sut.getHorizontalPosition());
   }
 }
