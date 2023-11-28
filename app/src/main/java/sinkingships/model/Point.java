@@ -2,9 +2,11 @@ package sinkingships.model;
 
 public class Point {
   private char xPosition;
+  private int yPosition;
 
-  public Point(char xPosition, int i) {
+  public Point(char xPosition, int yPosition) {
     this.xPosition = setXPositionLowerCase(xPosition);
+    this.yPosition = yPosition;
   }
 
   private char setXPositionLowerCase(char xPosition) {
@@ -21,7 +23,7 @@ public class Point {
   }
 
   public Integer getVerticalPosition() {
-    return null;
+    return this.yPosition;
   }
   
 }
