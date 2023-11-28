@@ -14,5 +14,9 @@ public class Point {
   public Object getHorizontalPosition() {
     return this.xPosition;
   }
+
+  public Integer getHorizontalIndex() {
+    return null;
+  }
   
 }

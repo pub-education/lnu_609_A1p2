@@ -22,8 +22,14 @@ public class PointTest {
   }
 
   @Test
-  public void shouldReturnHorizontalValueBLowerCase() {
-    Point sut = new Point('B', 2);
-    assertEquals('b', sut.getHorizontalPosition());
+  public void shouldReturnHorizontalValueLowerCase() {
+    Point sut = new Point('F', 2);
+    assertEquals('f', sut.getHorizontalPosition());
+  }
+
+  @Test
+  public void shouldReturnHorizontalValueIndex() {
+    Point sut = new Point('a', 2);
+    assertEquals(0, sut.getHorizontalIndex());
   }
 }
