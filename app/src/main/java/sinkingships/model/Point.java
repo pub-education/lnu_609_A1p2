@@ -16,7 +16,8 @@ public class Point {
   }
 
   public Integer getHorizontalIndex() {
-    return null;
+    // Create zero index for char values.
+    return this.xPosition - 'a';
   }
   
 }
