@@ -1,6 +1,7 @@
 package sinkingships.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -8,19 +9,22 @@ import java.lang.reflect.Field;
 import java.util.LinkedList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 /**
  * Tests for the Board class.
  */
 public class BoardTest {
 
-  Board sut;
-  int yMax = 10;
-  char xMax = 'j';
+  private Board sut;
+  private int yMax = 10;
+  private char xMax = 'j';
+  private Ship mockShip;
 
   @BeforeEach
   public void setUp() {
     sut = new Board(xMax, yMax);
+    mockShip = Mockito.mock(Ship.class);
   }
 
   @Test
@@ -36,16 +40,16 @@ public class BoardTest {
 
   // @Test
   // public void shouldHaveFiveShipsAfterCreation() {
-  //   assertEquals(5, sut.getShips().size());
+  // assertEquals(5, sut.getShips().size());
   // }
 
   // @Test
   // public void shouldHaveTheCorrectShipsAfterCreation() {
-  //   assertEquals(ShipType.AIRCRAFTCARRIER, sut.getShips().get(0));
-  //   assertEquals(ShipType.BATTLESHIP, sut.getShips().get(1));
-  //   assertEquals(ShipType.CRUISER, sut.getShips().get(2));
-  //   assertEquals(ShipType.SUBMARINE, sut.getShips().get(3));
-  //   assertEquals(ShipType.DESTROYER, sut.getShips().get(4));
+  // assertEquals(ShipType.AIRCRAFTCARRIER, sut.getShips().get(0));
+  // assertEquals(ShipType.BATTLESHIP, sut.getShips().get(1));
+  // assertEquals(ShipType.CRUISER, sut.getShips().get(2));
+  // assertEquals(ShipType.SUBMARINE, sut.getShips().get(3));
+  // assertEquals(ShipType.DESTROYER, sut.getShips().get(4));
   // }
 
   @Test
@@ -73,6 +77,14 @@ public class BoardTest {
   @Test
   public void shouldReturnTrueForAddShip() {
     ShipType ship = ShipType.AIRCRAFTCARRIER;
-    assertTrue(sut.addShip(ship));
+    // assertTrue(sut.addShip(ship));
+  }
+
+  @Test
+  public void shouldReturnFalseForShipOutOfBounds() {
+    Mockito.when(mockShip.getPosition()).thenReturn(new Point('a', 1));
+    Mockito.when(mockShip.getRotation()).thenReturn(Rotation.NORTH);
+
+    assertFalse(sut.addShip(mockShip));
   }
 }

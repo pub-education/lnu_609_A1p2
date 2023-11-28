@@ -38,7 +38,7 @@ public class Board {
     return xMax - 'a' + 1;
   }
 
-  public boolean addShip(ShipType ship) {
+  public boolean addShip(Ship ship) {
     return true;
   }
 }
