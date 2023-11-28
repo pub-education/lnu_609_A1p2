@@ -30,6 +30,6 @@ public class Board {
   }
 
   public Integer getMaxHeight() {
-    return null;
+    return 10;
   }
 }
