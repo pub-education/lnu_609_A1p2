@@ -22,6 +22,8 @@ public class BoardTest {
   @Test
   public void shouldHaveTheCorrectShipsAfterCreation() {
     Board sut = new Board();
+    // As we create the ships manually in the Board class on creation, we can be sure that the order/index is correct.
+    // If that process would be changed in the Board class we might fail this test.
     assertEquals(ShipType.CARRIER, sut.getShips().get(0));
     assertEquals(ShipType.BATTLESHIP, sut.getShips().get(1));
     assertEquals(ShipType.CRUISER, sut.getShips().get(2));
