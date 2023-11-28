@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import java.lang.reflect.Field;
 import java.util.LinkedList;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -13,15 +14,22 @@ import org.junit.jupiter.api.Test;
  */
 public class BoardTest {
 
+  Board sut;
+
+  @BeforeEach
+  public void setUp() {
+    sut = new Board();
+  }
+
   @Test
   public void shouldHaveFiveShipsAfterCreation() {
-    Board sut = new Board();
+    // Board sut = new Board();
     assertEquals(5, sut.getShips().size());
   }
 
   @Test
   public void shouldHaveTheCorrectShipsAfterCreation() {
-    Board sut = new Board();
+    // Board sut = new Board();
     assertEquals(ShipType.CARRIER, sut.getShips().get(0));
     assertEquals(ShipType.BATTLESHIP, sut.getShips().get(1));
     assertEquals(ShipType.CRUISER, sut.getShips().get(2));
@@ -31,7 +39,7 @@ public class BoardTest {
 
   @Test
   public void shouldNotReturnTheInternalShipList() {
-    Board sut = new Board();
+    // Board sut = new Board();
     LinkedList<ShipType> returnedShips = sut.getShips();
 
     LinkedList<ShipType> internalShips = null;
@@ -48,4 +56,6 @@ public class BoardTest {
       e.printStackTrace();
     }
   }
+
+  
 }
