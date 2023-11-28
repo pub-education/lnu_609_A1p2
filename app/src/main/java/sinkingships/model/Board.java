@@ -7,8 +7,12 @@ import java.util.LinkedList;
  */
 public class Board {
   private LinkedList<ShipType> ships;
+  private int yMax;
+  private char xMax;
 
   public Board(char xMax, int yMax) {
+    this.xMax = xMax;
+    this.yMax = yMax;
     ships = new LinkedList<>();
     loadShips();
   }
@@ -26,7 +30,7 @@ public class Board {
   }
 
   public Integer getMaxWidth() {
-    return 10;
+    return this.yMax;
   }
 
   public Integer getMaxHeight() {
