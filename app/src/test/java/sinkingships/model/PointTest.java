@@ -45,7 +45,16 @@ public class PointTest {
   @Test
   public void shouldReturnHorizontalValueIndexUppercase() {
 
-    Point sut = new Point('E', 2);
-    assertEquals(4, sut.getHorizontalIndex());
+    char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+    char[] alphabetLower = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+    try {
+      for (int i = 0; i < alphabet.length; i++) {
+        Point sut = new Point(alphabet[i], 2);
+        assertEquals(alphabetLower[i], sut.getHorizontalPosition());
+      }
+    } catch (Exception e) {
+      System.out.println(e);
+      assertFalse(true);
+    }
   }
 }
