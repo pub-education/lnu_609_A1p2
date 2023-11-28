@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 import java.lang.reflect.Field;
 import java.util.LinkedList;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,18 +17,16 @@ public class BoardTest {
 
   @BeforeEach
   public void setUp() {
-    sut = new Board();
+    sut = new Board('j', 10);
   }
 
   @Test
   public void shouldHaveFiveShipsAfterCreation() {
-    // Board sut = new Board();
     assertEquals(5, sut.getShips().size());
   }
 
   @Test
   public void shouldHaveTheCorrectShipsAfterCreation() {
-    // Board sut = new Board();
     assertEquals(ShipType.CARRIER, sut.getShips().get(0));
     assertEquals(ShipType.BATTLESHIP, sut.getShips().get(1));
     assertEquals(ShipType.CRUISER, sut.getShips().get(2));
@@ -39,23 +36,24 @@ public class BoardTest {
 
   @Test
   public void shouldNotReturnTheInternalShipList() {
-    // Board sut = new Board();
     LinkedList<ShipType> returnedShips = sut.getShips();
 
     LinkedList<ShipType> internalShips = null;
     try {
-      // Using the reflection API to access the private field "ships" of the Board class.
+      // Using the reflection API to access the private field "ships" of the Board
+      // class.
       Field field = Board.class.getDeclaredField("ships");
       // Making the private field "ships" accessible, so we can read it.
       field.setAccessible(true);
-      // Getting the value of the private field "ships" of the Board class and casting it to a LinkedList<ShipType>.
+      // Getting the value of the private field "ships" of the Board class and casting
+      // it to a LinkedList<ShipType>.
       internalShips = (LinkedList<ShipType>) field.get(sut);
 
-      assertNotSame(internalShips, returnedShips, "The returned list should be a copy of the internal list.");
+      assertNotSame(internalShips, returnedShips,
+          "The returned list should be a copy of the internal list.");
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
-
   
 }

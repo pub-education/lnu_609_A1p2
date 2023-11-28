@@ -8,7 +8,7 @@ import java.util.LinkedList;
 public class Board {
   private LinkedList<ShipType> ships;
 
-  public Board() {
+  public Board(char xMax, int yMax) {
     ships = new LinkedList<>();
     loadShips();
   }
