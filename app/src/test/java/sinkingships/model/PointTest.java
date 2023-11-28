@@ -73,4 +73,10 @@ public class PointTest {
       assertFalse(true);
     }
   }
+
+  @Test 
+  public void shouldReturnVerticalValue() {
+    Point sut = new Point('a', 2);
+    assertEquals(2, sut.getVerticalPosition());
+  }
 }

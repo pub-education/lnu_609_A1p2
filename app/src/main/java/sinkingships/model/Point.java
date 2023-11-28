@@ -19,5 +19,9 @@ public class Point {
     // Create zero index for char values.
     return this.xPosition - 'a';
   }
+
+  public Integer getVerticalPosition() {
+    return null;
+  }
   
 }
