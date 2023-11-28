@@ -20,4 +20,10 @@ public class PointTest {
     Point sut = new Point('b', 2);
     assertEquals('b', sut.getHorizontalPosition());
   }
+
+  @Test
+  public void shouldReturnHorizontalValueBLowerCase() {
+    Point sut = new Point('B', 2);
+    assertEquals('b', sut.getHorizontalPosition());
+  }
 }
