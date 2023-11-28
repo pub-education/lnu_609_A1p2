@@ -24,4 +24,8 @@ public class Board {
   public LinkedList<ShipType> getShips() {
     return new LinkedList<>(this.ships);
   }
+
+  public Integer getMaxWidth() {
+    return null;
+  }
 }

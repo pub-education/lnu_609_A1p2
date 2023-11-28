@@ -21,6 +21,11 @@ public class BoardTest {
   }
 
   @Test
+  public void shouldHaveTheCorrectWidthAfterCreation() {
+    assertEquals(10, sut.getMaxWidth());
+  }
+
+  @Test
   public void shouldHaveFiveShipsAfterCreation() {
     assertEquals(5, sut.getShips().size());
   }
@@ -55,5 +60,4 @@ public class BoardTest {
       e.printStackTrace();
     }
   }
-  
 }
