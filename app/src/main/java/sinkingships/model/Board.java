@@ -28,4 +28,8 @@ public class Board {
   public Integer getMaxWidth() {
     return 10;
   }
+
+  public Integer getMaxHeight() {
+    return null;
+  }
 }

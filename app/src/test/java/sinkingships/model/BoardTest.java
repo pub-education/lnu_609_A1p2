@@ -14,15 +14,22 @@ import org.junit.jupiter.api.Test;
 public class BoardTest {
 
   Board sut;
+  int yMax = 10;
+  char xMax = 'j';
 
   @BeforeEach
   public void setUp() {
-    sut = new Board('j', 10);
+    sut = new Board(xMax, yMax);
   }
 
   @Test
   public void shouldHaveTheCorrectWidthAfterCreation() {
     assertEquals(10, sut.getMaxWidth());
+  }
+
+  @Test
+  public void shouldHaveTheCorrectHeightAfterCreation() {
+    assertEquals(10, sut.getMaxHeight());
   }
 
   @Test
