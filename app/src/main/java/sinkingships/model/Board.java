@@ -7,6 +7,7 @@ import java.util.LinkedList;
  */
 public class Board {
   private LinkedList<ShipType> ships;
+  // Refactor these to a Point class later.
   private int yMax;
   private char xMax;
 
@@ -18,7 +19,7 @@ public class Board {
   }
 
   private void loadShips() {
-    ships.add(ShipType.CARRIER);
+    ships.add(ShipType.AIRCRAFTCARRIER);
     ships.add(ShipType.BATTLESHIP);
     ships.add(ShipType.CRUISER);
     ships.add(ShipType.SUBMARINE);

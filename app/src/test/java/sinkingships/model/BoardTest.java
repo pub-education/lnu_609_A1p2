@@ -39,7 +39,7 @@ public class BoardTest {
 
   @Test
   public void shouldHaveTheCorrectShipsAfterCreation() {
-    assertEquals(ShipType.CARRIER, sut.getShips().get(0));
+    assertEquals(ShipType.AIRCRAFTCARRIER, sut.getShips().get(0));
     assertEquals(ShipType.BATTLESHIP, sut.getShips().get(1));
     assertEquals(ShipType.CRUISER, sut.getShips().get(2));
     assertEquals(ShipType.SUBMARINE, sut.getShips().get(3));
