@@ -15,16 +15,16 @@ public class Board {
     this.xMax = xMax;
     this.yMax = yMax;
     ships = new LinkedList<>();
-    loadShips();
+    // loadShips();
   }
 
-  private void loadShips() {
-    ships.add(ShipType.AIRCRAFTCARRIER);
-    ships.add(ShipType.BATTLESHIP);
-    ships.add(ShipType.CRUISER);
-    ships.add(ShipType.SUBMARINE);
-    ships.add(ShipType.DESTROYER);
-  }
+  // private void loadShips() {
+  //   ships.add(ShipType.AIRCRAFTCARRIER);
+  //   ships.add(ShipType.BATTLESHIP);
+  //   ships.add(ShipType.CRUISER);
+  //   ships.add(ShipType.SUBMARINE);
+  //   ships.add(ShipType.DESTROYER);
+  // }
 
   public LinkedList<ShipType> getShips() {
     return new LinkedList<>(this.ships);
