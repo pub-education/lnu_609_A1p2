@@ -4,7 +4,11 @@ public class Point {
   private char xPosition;
 
   public Point(char xPosition, int i) {
-    this.xPosition = xPosition;
+    this.xPosition = setXPositionLowerCase(xPosition);
+  }
+
+  private char setXPositionLowerCase(char xPosition) {
+    return Character.toLowerCase(xPosition);
   }
 
   public Object getHorizontalPosition() {
