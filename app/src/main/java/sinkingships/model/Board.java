@@ -37,4 +37,8 @@ public class Board {
   public Integer getMaxHeight() {
     return xMax - 'a' + 1;
   }
+
+  public boolean addShip(ShipType ship) {
+    return (Boolean) null;
+  }
 }

@@ -2,6 +2,7 @@ package sinkingships.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.lang.reflect.Field;
 import java.util.LinkedList;
@@ -67,5 +68,11 @@ public class BoardTest {
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+
+  @Test
+  public void shouldReturnTrueForAddShip() {
+    ShipType ship = ShipType.AIRCRAFTCARRIER;
+    assertTrue(sut.addShip(ship));
   }
 }
