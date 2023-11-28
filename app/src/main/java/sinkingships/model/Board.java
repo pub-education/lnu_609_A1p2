@@ -39,6 +39,6 @@ public class Board {
   }
 
   public boolean addShip(ShipType ship) {
-    return (Boolean) null;
+    return true;
   }
 }
