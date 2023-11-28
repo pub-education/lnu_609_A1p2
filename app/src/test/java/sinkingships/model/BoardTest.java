@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 public class BoardTest {
 
   Board sut;
-  int yMax = 10;
+  int yMax = 5;
   char xMax = 'j';
 
   @BeforeEach
@@ -24,7 +24,7 @@ public class BoardTest {
 
   @Test
   public void shouldHaveTheCorrectWidthAfterCreation() {
-    assertEquals(10, sut.getMaxWidth());
+    assertEquals(yMax, sut.getMaxWidth());
   }
 
   @Test
