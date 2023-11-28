@@ -15,7 +15,7 @@ public class BoardTest {
 
   Board sut;
   int yMax = 5;
-  char xMax = 'j';
+  char xMax = 'c';
 
   @BeforeEach
   public void setUp() {
@@ -29,7 +29,7 @@ public class BoardTest {
 
   @Test
   public void shouldHaveTheCorrectHeightAfterCreation() {
-    assertEquals(10, sut.getMaxHeight());
+    assertEquals(3, sut.getMaxHeight());
   }
 
   @Test
