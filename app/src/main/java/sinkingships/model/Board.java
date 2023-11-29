@@ -57,5 +57,8 @@ public class Board {
     if(position.getHorizontalPosition() > this.yMax || position.getHorizontalPosition() < 0) {
       throw new IllegalArgumentException("Ship position is out of bounds.");
     }
+    if(position.getVerticalPosition() > this.xMax) {
+      throw new IllegalArgumentException("Ship position is out of bounds.");
+    }
   }
 }
