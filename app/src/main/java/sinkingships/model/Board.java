@@ -44,7 +44,18 @@ public class Board {
     if (ship == null) {
       throw new IllegalArgumentException("Ship cannot be null.");
     }
-    
+
+    try{
+      checkPositionWithinBounds(ship.getPosition());
+    } catch (IllegalArgumentException e) {
+      return false;
+    }
     return true;
+  }
+
+  private void checkPositionWithinBounds(Point position) {
+    if(position.getHorizontalPosition() > this.yMax || position.getHorizontalPosition() < 0) {
+      throw new IllegalArgumentException("Ship position is out of bounds.");
+    }
   }
 }
