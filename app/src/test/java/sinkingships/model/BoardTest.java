@@ -18,29 +18,35 @@ import org.mockito.Mockito;
 public class BoardTest {
 
   private Board sut;
-  private int yMax = 10;
-  private char xMax = 'j';
+  private int horizontalMax = 10;
+  private char verticalMax = 'j';
   private Ship mockShip;
+  private Point mockPoint;
 
   @BeforeEach
   public void setUp() {
-    sut = new Board(xMax, yMax);
+    mockPoint = Mockito.mock(Point.class);
+    Mockito.when(mockPoint.getHorizontalPosition()).thenReturn(horizontalMax);
+    Mockito.when(mockPoint.getVerticalPosition()).thenReturn(verticalMax);
+    Mockito.when(mockPoint.getVerticalIndex()).thenReturn(verticalMax - 'a');
+    sut = new Board(mockPoint);
     mockShip = Mockito.mock(Ship.class);
   }
 
   @Test
   public void shouldHaveTheCorrectWidthAfterCreation() {
-    assertEquals(yMax, sut.getMaxWidth());
+    assertEquals(horizontalMax, sut.getMaxWidth());
   }
 
   @Test
   public void shouldHaveTheCorrectHeightAfterCreation() {
-    int xMaxInt = xMax - 'a' + 1;
-    assertEquals(xMaxInt, sut.getMaxHeight());
+    int verticalMaxInt = verticalMax - 'a' + 1;
+    assertEquals(verticalMaxInt, sut.getMaxHeight());
   }
 
   // @Test
-  // public void shouldHaveFiveShipsAfterCreation() {
+  // public void shouldHaveFiveShipsAfterCreation() { 
+     
   // assertEquals(5, sut.getShips().size());
   // }
 

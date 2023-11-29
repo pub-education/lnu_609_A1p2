@@ -1,15 +1,18 @@
 package sinkingships.model;
 
+/**
+ * Point class.
+ */
 public class Point {
   private int xPosition;
   private char yPosition;
 
   public Point(int xPosition, char yPosition) {
-    this.yPosition = setYPositionLowerCase(yPosition);
+    this.yPosition = setYpositionLowerCase(yPosition);
     this.xPosition = xPosition;
   }
 
-  private char setYPositionLowerCase(char yPosition) {
+  private char setYpositionLowerCase(char yPosition) {
     return Character.toLowerCase(yPosition);
   }
 

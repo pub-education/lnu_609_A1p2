@@ -3,7 +3,7 @@ package sinkingships.view;
 import java.io.InputStream;
 import java.io.PrintStream;
 import sinkingships.customexception.InvalidInputException;
-import sinkingships.model.Cell;
+// import sinkingships.model.Cell;
 import sinkingships.model.Player;
 import sinkingships.model.Rotation;
 import sinkingships.model.ShotResponse;
@@ -25,29 +25,29 @@ public class MainView {
     out.println(message);
   }
 
-  protected String boardArrayToString(Cell[][] boardArray) {
-    StringBuilder boardString = new StringBuilder();
-    int width = boardArray[0].length;
-    boardString.append("   ");
-    for (int x = 1; x <= width; x++) {
-      boardString.append(x + "  ");
-    }
-    boardString.append("\n");
-    int height = boardArray.length;
-    for (int y = height - 1; y >= 0; y--) {
-      boardString.append((char) ('A' + (height - 1 - y))).append("  ");
-      for (int x = 0; x < width; x++) {
-        boardString.append(boardArray[y][x].getValue()).append("  ");
-      }
-      boardString.append("\n");
-    }
-    return boardString.toString();
-  }
+  // protected String boardArrayToString(Cell[][] boardArray) {
+  //   StringBuilder boardString = new StringBuilder();
+  //   int width = boardArray[0].length;
+  //   boardString.append("   ");
+  //   for (int x = 1; x <= width; x++) {
+  //     boardString.append(x + "  ");
+  //   }
+  //   boardString.append("\n");
+  //   int height = boardArray.length;
+  //   for (int y = height - 1; y >= 0; y--) {
+  //     boardString.append((char) ('A' + (height - 1 - y))).append("  ");
+  //     for (int x = 0; x < width; x++) {
+  //       boardString.append(boardArray[y][x].getValue()).append("  ");
+  //     }
+  //     boardString.append("\n");
+  //   }
+  //   return boardString.toString();
+  // }
 
-  public void displayBoard(Cell[][] boardArray) {
-    String boardString = boardArrayToString(boardArray);
-    displayMessage(boardString);
-  }
+  // public void displayBoard(Cell[][] boardArray) {
+  //   String boardString = boardArrayToString(boardArray);
+  //   displayMessage(boardString);
+  // }
 
   /**
    * Clears the screen.

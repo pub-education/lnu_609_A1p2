@@ -7,3 +7,4 @@ I started this document way too late but better late than never I guess.
 * Solution:
   * I used int and char as separate variables instead of using the Point class. A solution I'm not really happy with.
 
+Now I have tested the Point class and I can now mock it too.
