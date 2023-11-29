@@ -12,17 +12,17 @@ public class PointTest {
 
   @Test
   public void shouldReturnHorizontalValueA() {
-    Point sut = new Point('a', 2);
-    assertEquals('a', sut.getHorizontalPosition());
+    Point sut = new Point(2, 'a');
+    assertEquals(2, sut.getHorizontalPosition());
   }
 
   @Test
-  public void shouldReturnHorizontalValueAllLowerCaseLetters() {
+  public void shouldReturnVerticalValueAllLowerCaseLetters() {
     char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
     try {
       for (int i = 0; i < alphabet.length; i++) {
-        Point sut = new Point(alphabet[i], 2);
-        assertEquals(alphabet[i], sut.getHorizontalPosition());
+        Point sut = new Point(2, alphabet[i]);
+        assertEquals(alphabet[i], sut.getVerticalPosition());
       }
     } catch (Exception e) {
       System.out.println(e);
@@ -31,13 +31,13 @@ public class PointTest {
   }
 
   @Test
-  public void shouldReturnHorizontalValueLowerCaseForAllUpperCase() {
+  public void shouldReturnVerticalValueLowerCaseForAllUpperCaseEntries() {
     char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
     char[] alphabetLower = "abcdefghijklmnopqrstuvwxyz".toCharArray();
     try {
       for (int i = 0; i < alphabet.length; i++) {
-        Point sut = new Point(alphabet[i], 2);
-        assertEquals(alphabetLower[i], sut.getHorizontalPosition());
+        Point sut = new Point(2, alphabet[i]);
+        assertEquals(alphabetLower[i], sut.getVerticalPosition());
       }
     } catch (Exception e) {
       System.out.println(e);
@@ -46,12 +46,12 @@ public class PointTest {
   }
 
   @Test
-  public void shouldReturnHorizontalValueIndex() {
+  public void shouldReturnVerticalValueIndex() {
     char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
     try {
       for (int i = 0; i < alphabet.length; i++) {
-        Point sut = new Point(alphabet[i], 2);
-        assertEquals(i, sut.getHorizontalIndex());
+        Point sut = new Point(2, alphabet[i]);
+        assertEquals(i, sut.getVerticalIndex());
       }
     } catch (Exception e) {
       System.out.println(e);
@@ -60,13 +60,13 @@ public class PointTest {
   }
 
   @Test
-  public void shouldReturnHorizontalValueIndexUppercase() {
+  public void shouldReturnVerticalValueIndexUppercase() {
     char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 
     try {
       for (int i = 0; i < alphabet.length; i++) {
-        Point sut = new Point(alphabet[i], 2);
-        assertEquals(i, sut.getHorizontalIndex());
+        Point sut = new Point(2, alphabet[i]);
+        assertEquals(i, sut.getVerticalIndex());
       }
     } catch (Exception e) {
       System.out.println(e);
@@ -75,13 +75,13 @@ public class PointTest {
   }
 
   @Test 
-  public void shouldReturnVerticalValue() {
+  public void shouldReturnHorizontalValue() {
     int[] numbers = {0, 1, 2, 3, 4, 5, 7, 9, 11, 17, 23, 101};
 
     try {
       for (int i = 0; i < numbers.length; i++) {
-        Point sut = new Point('a', numbers[i]);
-        assertEquals(numbers[i], sut.getVerticalPosition());
+        Point sut = new Point(numbers[i], 'a');
+        assertEquals(numbers[i], sut.getHorizontalPosition());
       }
     } catch (Exception e) {
       System.out.println(e);
