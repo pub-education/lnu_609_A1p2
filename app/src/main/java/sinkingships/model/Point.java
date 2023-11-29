@@ -13,7 +13,7 @@ public class Point {
     return Character.toLowerCase(yPosition);
   }
 
-  public Object getVerticalPosition() {
+  public char getVerticalPosition() {
     return this.yPosition;
   }
 

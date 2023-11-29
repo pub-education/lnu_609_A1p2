@@ -118,4 +118,13 @@ public class BoardTest {
 
     assertFalse(sut.addShip(mockShip));
   }
+
+  @Test
+  public void shouldReturnFalseForShipOutOfBoundsVerticallyGreater() {
+    // Check beyond max.
+    Mockito.when(mockShip.getPosition()).thenReturn(new Point(0, 'k'));
+    Mockito.when(mockShip.getRotation()).thenReturn(Rotation.NORTH);
+
+    assertFalse(sut.addShip(mockShip));
+  }
 }
