@@ -127,4 +127,13 @@ public class BoardTest {
 
     assertFalse(sut.addShip(mockShip));
   }
+
+  @Test
+  public void shouldReturnFalseForShipOutOfBoundsVerticallySmaller() {
+    // Check below/before min.
+    Mockito.when(mockShip.getPosition()).thenReturn(new Point(0, '`'));
+    Mockito.when(mockShip.getRotation()).thenReturn(Rotation.NORTH);
+
+    assertFalse(sut.addShip(mockShip));
+  }
 }
