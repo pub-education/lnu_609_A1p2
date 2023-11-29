@@ -106,7 +106,14 @@ public class BoardTest {
 
   @Test
   public void shouldReturnFalseForShipOutOfBoundsHorizontally() {
+    // Check beyond max.
     Mockito.when(mockShip.getPosition()).thenReturn(new Point(11, 'a'));
+    Mockito.when(mockShip.getRotation()).thenReturn(Rotation.NORTH);
+
+    assertFalse(sut.addShip(mockShip));
+
+    // Check below min.
+    Mockito.when(mockShip.getPosition()).thenReturn(new Point(-1, 'a'));
     Mockito.when(mockShip.getRotation()).thenReturn(Rotation.NORTH);
 
     assertFalse(sut.addShip(mockShip));
