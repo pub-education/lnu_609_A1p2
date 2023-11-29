@@ -39,6 +39,9 @@ public class Board {
   }
 
   public boolean addShip(Ship ship) {
+    if (ship == null) {
+      throw new IllegalArgumentException("Ship cannot be null.");
+    }
     return true;
   }
 }
