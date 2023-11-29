@@ -15,8 +15,7 @@ public class Board {
   /**
    * Constructor for the Board class.
    *
-   * @param xMax The maximum x value of the board.
-   * @param yMax The maximum y value of the board.
+   * @param maxPoint The maximum point of the board.
    */
   public Board(Point maxPoint) {
     this.horizontalMax = maxPoint.getHorizontalPosition();
@@ -32,7 +31,6 @@ public class Board {
   // ships.add(ShipType.SUBMARINE);
   // ships.add(ShipType.DESTROYER);
   // }
-
 
   public LinkedList<ShipType> getShips() {
     return new LinkedList<>(this.ships);
@@ -67,10 +65,12 @@ public class Board {
   }
 
   private void checkPositionWithinBounds(Point position) {
-    if (position.getHorizontalPosition() > this.verticalMax || position.getHorizontalPosition() < 0) {
+    if (position.getHorizontalPosition() > this.verticalMax
+        || position.getHorizontalPosition() < 0) {
       throw new IllegalArgumentException("Ship position is out of bounds.");
     }
-    if (position.getVerticalPosition() > this.horizontalMax || position.getVerticalPosition() < 'a') {
+    if (position.getVerticalPosition() > this.horizontalMax
+        || position.getVerticalPosition() < 'a') {
       throw new IllegalArgumentException("Ship position is out of bounds.");
     }
   }

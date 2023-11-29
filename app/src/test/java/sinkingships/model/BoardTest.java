@@ -23,6 +23,9 @@ public class BoardTest {
   private Ship mockShip;
   private Point mockPoint;
 
+  /**
+   * Sets up the test fixture.
+   */
   @BeforeEach
   public void setUp() {
     mockPoint = Mockito.mock(Point.class);
