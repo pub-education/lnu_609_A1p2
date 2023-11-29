@@ -81,8 +81,8 @@ public class BoardTest {
   }
 
   @Test
-  public void shouldReturnFalseForShipOutOfBounds() {
-    Mockito.when(mockShip.getPosition()).thenReturn(new Point(1, 'a'));
+  public void shouldReturnFalseForShipOutOfBoundsHorizontally() {
+    Mockito.when(mockShip.getPosition()).thenReturn(new Point(11, 'a'));
     Mockito.when(mockShip.getRotation()).thenReturn(Rotation.NORTH);
 
     assertFalse(sut.addShip(mockShip));
