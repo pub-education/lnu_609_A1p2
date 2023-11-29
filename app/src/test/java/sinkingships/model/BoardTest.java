@@ -90,6 +90,21 @@ public class BoardTest {
   }
 
   @Test
+  public void shouldNotThrowIllegalArgumentException() {
+    Mockito.when(mockShip.getPosition()).thenReturn(new Point(11, 'a'));
+    Mockito.when(mockShip.getRotation()).thenReturn(Rotation.NORTH);
+    try {
+      sut.addShip(mockShip);
+    } catch (IllegalArgumentException e) {
+      e.printStackTrace();
+      assertTrue(false);
+    } catch (Exception e) {
+      e.printStackTrace();
+      assertTrue(false);
+    }
+  }
+
+  @Test
   public void shouldReturnFalseForShipOutOfBoundsHorizontally() {
     Mockito.when(mockShip.getPosition()).thenReturn(new Point(11, 'a'));
     Mockito.when(mockShip.getRotation()).thenReturn(Rotation.NORTH);
