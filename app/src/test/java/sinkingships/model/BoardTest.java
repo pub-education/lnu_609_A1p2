@@ -91,7 +91,7 @@ public class BoardTest {
 
   @Test
   public void shouldNotThrowIllegalArgumentException() {
-    Mockito.when(mockShip.getPosition()).thenReturn(new Point(11, 'a'));
+    Mockito.when(mockShip.getPosition()).thenReturn(new Point(0, 'a'));
     Mockito.when(mockShip.getRotation()).thenReturn(Rotation.NORTH);
     try {
       sut.addShip(mockShip);

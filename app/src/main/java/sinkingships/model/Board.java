@@ -1,6 +1,7 @@
 package sinkingships.model;
 
 import java.util.LinkedList;
+import javax.annotation.Nonnull;
 
 /**
  * Abstract class for a player.
@@ -38,10 +39,12 @@ public class Board {
     return xMax - 'a' + 1;
   }
 
-  public boolean addShip(Ship ship) {
+  public boolean addShip(@Nonnull Ship ship) {
+    // Null check is retained as a defensive programming measure.
     if (ship == null) {
       throw new IllegalArgumentException("Ship cannot be null.");
     }
+    
     return true;
   }
 }
