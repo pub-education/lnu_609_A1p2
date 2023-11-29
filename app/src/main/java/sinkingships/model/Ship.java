@@ -18,4 +18,12 @@ public class Ship {
     return this.shipType.getSize();
   }
 
+  public Rotation getRotation() {
+    return null;
+  }
+
+  public Point getPosition() {
+    return null;
+  }
+
 }

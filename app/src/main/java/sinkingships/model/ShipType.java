@@ -4,7 +4,7 @@ package sinkingships.model;
  * ShipType enum.
  */
 public enum ShipType {
-  CARRIER("Carrier", 5),
+  AIRCRAFTCARRIER("Aircraft Carrier", 5),
   BATTLESHIP("Battleship", 4),
   CRUISER("Cruiser", 3),
   SUBMARINE("Submarine", 3),
