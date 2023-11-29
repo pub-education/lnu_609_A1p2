@@ -1,29 +1,29 @@
 package sinkingships.model;
 
 public class Point {
-  private char xPosition;
-  private int yPosition;
+  private int xPosition;
+  private char yPosition;
 
-  public Point(char xPosition, int yPosition) {
-    this.xPosition = setXPositionLowerCase(xPosition);
-    this.yPosition = yPosition;
+  public Point(int xPosition, char yPosition) {
+    this.yPosition = setYPositionLowerCase(yPosition);
+    this.xPosition = xPosition;
   }
 
-  private char setXPositionLowerCase(char xPosition) {
-    return Character.toLowerCase(xPosition);
+  private char setYPositionLowerCase(char yPosition) {
+    return Character.toLowerCase(yPosition);
   }
 
-  public Object getHorizontalPosition() {
-    return this.xPosition;
-  }
-
-  public Integer getHorizontalIndex() {
-    // Create zero index for char values.
-    return this.xPosition - 'a';
-  }
-
-  public Integer getVerticalPosition() {
+  public Object getVerticalPosition() {
     return this.yPosition;
+  }
+
+  public int getVerticalIndex() {
+    // Create zero index for char values.
+    return this.yPosition - 'a';
+  }
+
+  public int getHorizontalPosition() {
+    return this.xPosition;
   }
   
 }
