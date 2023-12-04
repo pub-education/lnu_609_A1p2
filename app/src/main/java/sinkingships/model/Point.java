@@ -4,12 +4,12 @@ package sinkingships.model;
  * Point class.
  */
 public class Point {
-  private int xPosition;
-  private char yPosition;
+  private int horizontalPosition;
+  private char verticalPosition;
 
-  public Point(int xPosition, char yPosition) {
-    this.yPosition = setYpositionLowerCase(yPosition);
-    this.xPosition = xPosition;
+  public Point(int horizontalPosition, char verticalPosition) {
+    this.verticalPosition = setYpositionLowerCase(verticalPosition);
+    this.horizontalPosition = horizontalPosition;
   }
 
   private char setYpositionLowerCase(char yPosition) {
@@ -17,16 +17,16 @@ public class Point {
   }
 
   public char getVerticalPosition() {
-    return this.yPosition;
+    return this.verticalPosition;
   }
 
   public int getVerticalIndex() {
     // Create zero index for char values.
-    return this.yPosition - 'a';
+    return this.verticalPosition - 'a';
   }
 
   public int getHorizontalPosition() {
-    return this.xPosition;
+    return this.horizontalPosition;
   }
   
 }

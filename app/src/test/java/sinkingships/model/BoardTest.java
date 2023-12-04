@@ -48,8 +48,8 @@ public class BoardTest {
   }
 
   // @Test
-  // public void shouldHaveFiveShipsAfterCreation() { 
-     
+  // public void shouldHaveFiveShipsAfterCreation() {
+
   // assertEquals(5, sut.getShips().size());
   // }
 
@@ -95,6 +95,13 @@ public class BoardTest {
 
     assertThrows(IllegalArgumentException.class, () -> {
       sut.addShip(null);
+    });
+
+    assertThrows(IllegalArgumentException.class, () -> {
+      Mockito.when(mockPoint.getHorizontalPosition()).thenReturn(-1);
+      Mockito.when(mockPoint.getVerticalPosition()).thenReturn('a');
+      Mockito.when(mockShip.getPosition()).thenReturn(mockPoint);
+      sut.addShip(mockShip);
     });
   }
 
