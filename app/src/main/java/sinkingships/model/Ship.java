@@ -26,4 +26,8 @@ public class Ship {
     return null;
   }
 
+  public Object getName() {
+    return this.shipType.getName();
+  }
+
 }

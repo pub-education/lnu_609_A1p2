@@ -28,42 +28,35 @@ public class BoardTest {
    */
   @BeforeEach
   public void setUp() {
-    mockPoint = Mockito.mock(Point.class);
-    Mockito.when(mockPoint.getHorizontalPosition()).thenReturn(horizontalMax);
-    Mockito.when(mockPoint.getVerticalPosition()).thenReturn(verticalMax);
-    Mockito.when(mockPoint.getVerticalIndex()).thenReturn(verticalMax - 'a');
-    sut = new Board(mockPoint);
     mockShip = Mockito.mock(Ship.class);
+    mockPoint = Mockito.mock(Point.class);
   }
 
   @Test
   public void shouldHaveTheCorrectWidthAfterCreation() {
+    Mockito.when(mockPoint.getHorizontalPosition()).thenReturn(horizontalMax);
+    Mockito.when(mockPoint.getVerticalPosition()).thenReturn('a');
+
+    sut = new Board(mockPoint);
     assertEquals(horizontalMax, sut.getMaxWidth());
   }
 
   @Test
   public void shouldHaveTheCorrectHeightAfterCreation() {
+    Mockito.when(mockPoint.getHorizontalPosition()).thenReturn(horizontalMax);
+    Mockito.when(mockPoint.getVerticalPosition()).thenReturn('j');
+
+    sut = new Board(mockPoint);
     int verticalMaxInt = verticalMax - 'a' + 1;
     assertEquals(verticalMaxInt, sut.getMaxHeight());
   }
 
-  // @Test
-  // public void shouldHaveFiveShipsAfterCreation() {
-
-  // assertEquals(5, sut.getShips().size());
-  // }
-
-  // @Test
-  // public void shouldHaveTheCorrectShipsAfterCreation() {
-  // assertEquals(ShipType.AIRCRAFTCARRIER, sut.getShips().get(0));
-  // assertEquals(ShipType.BATTLESHIP, sut.getShips().get(1));
-  // assertEquals(ShipType.CRUISER, sut.getShips().get(2));
-  // assertEquals(ShipType.SUBMARINE, sut.getShips().get(3));
-  // assertEquals(ShipType.DESTROYER, sut.getShips().get(4));
-  // }
-
   @Test
   public void shouldNotReturnTheInternalShipList() {
+    Mockito.when(mockPoint.getHorizontalPosition()).thenReturn(horizontalMax);
+    Mockito.when(mockPoint.getVerticalPosition()).thenReturn('a');
+
+    sut = new Board(mockPoint);
     LinkedList<ShipType> returnedShips = sut.getShips();
 
     LinkedList<ShipType> internalShips = null;
@@ -85,52 +78,45 @@ public class BoardTest {
   }
 
   @Test
-  public void shouldReturnTrueForAddShip() {
-    ShipType ship = ShipType.AIRCRAFTCARRIER;
-    // assertTrue(sut.addShip(ship));
-  }
-
-  @Test
   public void shouldThrowIllegalArgumentException() {
+    Mockito.when(mockPoint.getHorizontalPosition()).thenReturn(horizontalMax);
+    Mockito.when(mockPoint.getVerticalPosition()).thenReturn('a');
+
+    sut = new Board(mockPoint);
 
     assertThrows(IllegalArgumentException.class, () -> {
       sut.addShip(null);
     });
-
-    assertThrows(IllegalArgumentException.class, () -> {
-      Mockito.when(mockPoint.getHorizontalPosition()).thenReturn(-1);
-      Mockito.when(mockPoint.getVerticalPosition()).thenReturn('a');
-      Mockito.when(mockShip.getPosition()).thenReturn(mockPoint);
-      sut.addShip(mockShip);
-    });
   }
 
   @Test
-  public void shouldNotThrowIllegalArgumentException() {
-    Mockito.when(mockShip.getPosition()).thenReturn(new Point(0, 'a'));
-    Mockito.when(mockShip.getRotation()).thenReturn(Rotation.NORTH);
-    try {
-      sut.addShip(mockShip);
-    } catch (IllegalArgumentException e) {
-      e.printStackTrace();
-      assertTrue(false);
-    } catch (Exception e) {
-      e.printStackTrace();
-      assertTrue(false);
-    }
-  }
+  void shouldReturnFalseWhenHorizontalIsTooLarge() {
+    Mockito.when(mockPoint.getHorizontalPosition()).thenReturn(horizontalMax + 1);
+    Mockito.when(mockPoint.getVerticalPosition()).thenReturn('a');
 
-  @Test
-  public void shouldReturnFalseForShipOutOfBoundsHorizontally() {
-    // Check beyond max.
-    Mockito.when(mockShip.getPosition()).thenReturn(new Point(11, 'a'));
-    Mockito.when(mockShip.getRotation()).thenReturn(Rotation.NORTH);
+    Ship mockShip = Mockito.mock(Ship.class);
+    Mockito.when(mockShip.getPosition()).thenReturn(mockPoint);
+
+    Point boardMockPoint = Mockito.mock(Point.class);
+    Mockito.when(boardMockPoint.getHorizontalPosition()).thenReturn(horizontalMax);
+    Mockito.when(boardMockPoint.getVerticalPosition()).thenReturn('j');
+    sut = new Board(boardMockPoint);
 
     assertFalse(sut.addShip(mockShip));
+  }
 
-    // Check below min.
-    Mockito.when(mockShip.getPosition()).thenReturn(new Point(-1, 'a'));
-    Mockito.when(mockShip.getRotation()).thenReturn(Rotation.NORTH);
+  @Test
+  void shouldReturnFalseWhenHorizontalIsTooSmall() {
+    Mockito.when(mockPoint.getHorizontalPosition()).thenReturn(-1);
+    Mockito.when(mockPoint.getVerticalPosition()).thenReturn('a');
+
+    Ship mockShip = Mockito.mock(Ship.class);
+    Mockito.when(mockShip.getPosition()).thenReturn(mockPoint);
+
+    Point boardMockPoint = Mockito.mock(Point.class);
+    Mockito.when(boardMockPoint.getHorizontalPosition()).thenReturn(horizontalMax);
+    Mockito.when(boardMockPoint.getVerticalPosition()).thenReturn('j');
+    sut = new Board(boardMockPoint);
 
     assertFalse(sut.addShip(mockShip));
   }
@@ -138,8 +124,16 @@ public class BoardTest {
   @Test
   public void shouldReturnFalseForShipOutOfBoundsVerticallyGreater() {
     // Check beyond max.
-    Mockito.when(mockShip.getPosition()).thenReturn(new Point(0, 'k'));
-    Mockito.when(mockShip.getRotation()).thenReturn(Rotation.NORTH);
+    Mockito.when(mockPoint.getHorizontalPosition()).thenReturn(horizontalMax - 1);
+    Mockito.when(mockPoint.getVerticalPosition()).thenReturn('k');
+
+    Ship mockShip = Mockito.mock(Ship.class);
+    Mockito.when(mockShip.getPosition()).thenReturn(mockPoint);
+
+    Point boardMockPoint = Mockito.mock(Point.class);
+    Mockito.when(boardMockPoint.getHorizontalPosition()).thenReturn(horizontalMax);
+    Mockito.when(boardMockPoint.getVerticalPosition()).thenReturn('j');
+    sut = new Board(boardMockPoint);
 
     assertFalse(sut.addShip(mockShip));
   }
@@ -147,9 +141,34 @@ public class BoardTest {
   @Test
   public void shouldReturnFalseForShipOutOfBoundsVerticallySmaller() {
     // Check below/before min.
-    Mockito.when(mockShip.getPosition()).thenReturn(new Point(0, '`'));
-    Mockito.when(mockShip.getRotation()).thenReturn(Rotation.NORTH);
+    Mockito.when(mockPoint.getHorizontalPosition()).thenReturn(horizontalMax - 1);
+    Mockito.when(mockPoint.getVerticalPosition()).thenReturn('`');
+
+    Ship mockShip = Mockito.mock(Ship.class);
+    Mockito.when(mockShip.getPosition()).thenReturn(mockPoint);
+
+    Point boardMockPoint = Mockito.mock(Point.class);
+    Mockito.when(boardMockPoint.getHorizontalPosition()).thenReturn(horizontalMax);
+    Mockito.when(boardMockPoint.getVerticalPosition()).thenReturn('j');
+    sut = new Board(boardMockPoint);
 
     assertFalse(sut.addShip(mockShip));
   }
+
+  @Test
+  public void shouldReturnTrue() {
+    Mockito.when(mockPoint.getHorizontalPosition()).thenReturn(horizontalMax - 1);
+    Mockito.when(mockPoint.getVerticalPosition()).thenReturn('a');
+
+    Ship mockShip = Mockito.mock(Ship.class);
+    Mockito.when(mockShip.getPosition()).thenReturn(mockPoint);
+
+    Point boardMockPoint = Mockito.mock(Point.class);
+    Mockito.when(boardMockPoint.getHorizontalPosition()).thenReturn(horizontalMax);
+    Mockito.when(boardMockPoint.getVerticalPosition()).thenReturn('j');
+    sut = new Board(boardMockPoint);
+
+    assertTrue(sut.addShip(mockShip));
+  }
+
 }
