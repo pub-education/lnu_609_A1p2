@@ -21,16 +21,8 @@ public class Board {
     this.horizontalMax = maxPoint.getHorizontalPosition();
     this.verticalMax = maxPoint.getVerticalPosition();
     ships = new LinkedList<>();
-    // loadShips();
   }
 
-  // private void loadShips() {
-  // ships.add(ShipType.AIRCRAFTCARRIER);
-  // ships.add(ShipType.BATTLESHIP);
-  // ships.add(ShipType.CRUISER);
-  // ships.add(ShipType.SUBMARINE);
-  // ships.add(ShipType.DESTROYER);
-  // }
 
   public LinkedList<ShipType> getShips() {
     return new LinkedList<>(this.ships);
@@ -50,7 +42,7 @@ public class Board {
    * @param ship The ship to be added.
    * @return True if the ship was added successfully, false otherwise.
    */
-  public boolean addShip(@Nonnull Ship ship) {
+  public boolean addShip(Ship ship) {
     // Null check is retained as a defensive programming measure.
     if (ship == null) {
       throw new IllegalArgumentException("Ship cannot be null.");
@@ -65,11 +57,11 @@ public class Board {
   }
 
   private void checkPositionWithinBounds(Point position) {
-    if (position.getHorizontalPosition() > this.verticalMax
+    if (position.getHorizontalPosition() > this.horizontalMax
         || position.getHorizontalPosition() < 0) {
       throw new IllegalArgumentException("Ship position is out of bounds.");
     }
-    if (position.getVerticalPosition() > this.horizontalMax
+    if (position.getVerticalPosition() > this.verticalMax
         || position.getVerticalPosition() < 'a') {
       throw new IllegalArgumentException("Ship position is out of bounds.");
     }

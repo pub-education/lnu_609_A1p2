@@ -10,8 +10,8 @@ public class Ship {
     this.shipType = shipType;
   }
 
-  public String getShipType() {
-    return this.shipType.getName();
+  public ShipType getShipType() {
+    return this.shipType;
   }
 
   public Integer getShipSize() {
@@ -24,6 +24,10 @@ public class Ship {
 
   public Point getPosition() {
     return null;
+  }
+
+  public Object getName() {
+    return this.shipType.getName();
   }
 
 }
