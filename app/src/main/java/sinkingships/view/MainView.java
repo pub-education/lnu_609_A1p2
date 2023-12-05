@@ -14,11 +14,14 @@ import sinkingships.model.ShotResponse;
 public class MainView {
 
   public static final String GREETING = null;
+  private PrintStream outStream;
 
   public MainView(PrintStream outStream) {
+    this.outStream = outStream;
   }
 
   public void displayWelcomeMessage() {
+    outStream.println(this.GREETING);
   }
 
 }
