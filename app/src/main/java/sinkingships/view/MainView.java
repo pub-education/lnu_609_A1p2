@@ -5,7 +5,9 @@ import java.io.PrintStream;
 import sinkingships.customexception.InvalidInputException;
 // import sinkingships.model.Cell;
 import sinkingships.model.Player;
+import sinkingships.model.Point;
 import sinkingships.model.Rotation;
+import sinkingships.model.Ship;
 import sinkingships.model.ShotResponse;
 
 /**
@@ -20,8 +22,15 @@ public class MainView {
     this.outStream = outStream;
   }
 
+  public MainView() {
+  }
+
   public void displayWelcomeMessage() {
     outStream.println(this.GREETING);
+  }
+
+  public Point getShipPlacement(Ship shipMock) {
+    return null;
   }
 
 }
