@@ -4,10 +4,14 @@ import java.io.PrintStream;
 
 public class WelcomeView {
 
-  public WelcomeView(PrintStream outStreamMock) {
+  private PrintStream outStream;
+
+  public WelcomeView(PrintStream outStream) {
+    this.outStream = outStream;
   }
 
-  public void displayWelcomeMessage() {
+  protected void displayWelcomeMessage() {
+    outStream.println("Welcome to Sinking Ships!");
   }
   
 }
