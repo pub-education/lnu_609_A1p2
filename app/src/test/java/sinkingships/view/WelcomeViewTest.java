@@ -16,6 +16,6 @@ public class WelcomeViewTest {
     var sut = new WelcomeView(outStreamMock);
     sut.displayWelcomeMessage();
 
-    verify(outStreamMock).println("Welcome to Sinking Ships!");
+    verify(outStreamMock).println(sut.GREETING);
   }
 }

@@ -4,6 +4,7 @@ import java.io.PrintStream;
 
 public class WelcomeView {
 
+  public static final String GREETING = "Welcome to Sinking Ships!";
   private PrintStream outStream;
 
   public WelcomeView(PrintStream outStream) {
@@ -11,7 +12,7 @@ public class WelcomeView {
   }
 
   protected void displayWelcomeMessage() {
-    outStream.println("Welcome to Sinking Ships!");
+    outStream.println(this.GREETING);
   }
   
 }
