@@ -13,7 +13,7 @@ import sinkingships.model.ShotResponse;
  */
 public class MainView {
 
-  public static final String GREETING = null;
+  public static final String GREETING = "Welcome to Sinking Ships!";
   private PrintStream outStream;
 
   public MainView(PrintStream outStream) {
