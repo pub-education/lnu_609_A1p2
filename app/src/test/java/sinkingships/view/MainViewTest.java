@@ -31,7 +31,7 @@ public class MainViewTest {
   }
 
   @AfterEach
-  void restoreSystemIO() {
+  void restoreSystemIo() {
     System.setIn(originalIn);
     System.setOut(originalOut);
   }
@@ -56,7 +56,12 @@ public class MainViewTest {
     Mockito.when(shipMock.getShipType()).thenReturn(ShipType.BATTLESHIP);
 
     var sut = new MainView();
-    var shipPlacement = sut.getShipPlacement(shipMock);
+    Point shipPlacement = new Point(0, 'a');
+    try {
+      shipPlacement = sut.getShipPlacement(shipMock);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
 
     Point pointMock = mock(Point.class);
     Mockito.when(pointMock.getHorizontalPosition()).thenReturn(4);
