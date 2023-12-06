@@ -2,6 +2,7 @@ package sinkingships.view;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 // import sinkingships.model.Cell;
 import sinkingships.model.Player;
@@ -16,30 +17,27 @@ import sinkingships.model.ShotResponse;
 public class MainView {
 
   public static final String GREETING = "Welcome to Sinking Ships!";
-  private PrintStream outStream;
-  private InputStream inStream;
-
-  public MainView(PrintStream outStream) {
-    this.outStream = outStream;
-  }
 
   public MainView() {
   }
 
-  public MainView(InputStream testIn) {
-    this.inStream = testIn;
-  }
-
   public void displayWelcomeMessage() {
-    outStream.println(this.GREETING);
+    System.out.println(this.GREETING);
   }
 
-  public Point getShipPlacement(Ship shipMock) {
-    char vertical= '`';
+  /**
+   * Placing the Player's ships.
+   *
+   * @param ship - the ship to be placed
+   * @return the point where the ship is placed
+   */
+  public Point getShipPlacement(Ship ship) {
+    char vertical = '`';
     int horizontal = -1;
+    Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8.name());
+
     try {
-      Scanner scanner = new Scanner(this.inStream);
-      System.out.println("Enter the position of your " + shipMock.getShipType() + " (e.g. a1): ");
+      System.out.println("Enter the position of your " + ship.getShipType() + " (e.g. a1): ");
       String input = scanner.nextLine();
       if (input.length() != 2) {
         throw new IllegalArgumentException("Invalid input. Please enter a letter and a number.");
@@ -52,6 +50,8 @@ public class MainView {
     } catch (Exception e) {
       return null;
       // throw new Exception(e.getMessage());
+    } finally {
+      scanner.close();
     }
   }
 

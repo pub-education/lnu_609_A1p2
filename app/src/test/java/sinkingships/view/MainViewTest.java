@@ -9,7 +9,6 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -23,6 +22,7 @@ import sinkingships.model.ShipType;
 public class MainViewTest {
 
   private final InputStream originalIn = System.in;
+  private final PrintStream originalOut = System.out;
   private InputStream testIn;
 
   @BeforeEach
@@ -31,15 +31,17 @@ public class MainViewTest {
   }
 
   @AfterEach
-  void restoreSystemIn() {
+  void restoreSystemIO() {
     System.setIn(originalIn);
+    System.setOut(originalOut);
   }
 
   @Test
   void displayWelcomeMessageOutputGreeting() {
     PrintStream outStreamMock = mock(PrintStream.class);
+    System.setOut(outStreamMock);
 
-    var sut = new MainView(outStreamMock);
+    var sut = new MainView();
     sut.displayWelcomeMessage();
 
     verify(outStreamMock).println(sut.GREETING);
@@ -53,7 +55,7 @@ public class MainViewTest {
     Ship shipMock = mock(Ship.class);
     Mockito.when(shipMock.getShipType()).thenReturn(ShipType.BATTLESHIP);
 
-    var sut = new MainView(this.testIn);
+    var sut = new MainView();
     var shipPlacement = sut.getShipPlacement(shipMock);
 
     Point pointMock = mock(Point.class);
@@ -72,7 +74,7 @@ public class MainViewTest {
     Ship shipMock = mock(Ship.class);
     Mockito.when(shipMock.getShipType()).thenReturn(ShipType.BATTLESHIP);
 
-    var sut = new MainView(this.testIn);
+    var sut = new MainView();
     assertThrows(IllegalArgumentException.class, () -> {
       sut.getShipPlacement(shipMock);
     });
