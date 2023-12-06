@@ -47,8 +47,11 @@ public class MainView {
       vertical = input.charAt(0);
       horizontal = Integer.parseInt(input.substring(1));
       return new Point(horizontal, vertical);
+    } catch (IllegalArgumentException e) {
+      throw new IllegalArgumentException(e.getMessage());
     } catch (Exception e) {
       return null;
+      // throw new Exception(e.getMessage());
     }
   }
 

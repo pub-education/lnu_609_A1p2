@@ -27,9 +27,7 @@ public class MainViewTest {
 
   @BeforeEach
   void setSystemIn() {
-    String input = "c4\n";
-    testIn = new ByteArrayInputStream(input.getBytes());
-    System.setIn(testIn);
+    
   }
 
   @AfterEach
@@ -49,6 +47,9 @@ public class MainViewTest {
 
   @Test
   void shouldGetInputToPlaceShipOnBoard() {
+    String input = "c4\n";
+    testIn = new ByteArrayInputStream(input.getBytes());
+    System.setIn(testIn);
     Ship shipMock = mock(Ship.class);
     Mockito.when(shipMock.getShipType()).thenReturn(ShipType.BATTLESHIP);
 
@@ -63,15 +64,15 @@ public class MainViewTest {
   }
 
   @Test
-  void shouldThrowInvalidInputExceptionForTwoDigitNumbers() {
+  void shouldThrowIllegalArgumentExceptionForTwoDigitNumbers() {
+    String input = "c14\n";
+    testIn = new ByteArrayInputStream(input.getBytes());
+    System.setIn(testIn);
+
     Ship shipMock = mock(Ship.class);
     Mockito.when(shipMock.getShipType()).thenReturn(ShipType.BATTLESHIP);
 
     var sut = new MainView(this.testIn);
-
-    Point pointMock = mock(Point.class);
-    Mockito.when(pointMock.getHorizontalPosition()).thenReturn(14);
-    Mockito.when(pointMock.getVerticalPosition()).thenReturn('c');
     assertThrows(IllegalArgumentException.class, () -> {
       sut.getShipPlacement(shipMock);
     });
