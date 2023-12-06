@@ -1,213 +1,133 @@
 package sinkingships.view;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.atLeastOnce;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
 import java.io.PrintStream;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import sinkingships.model.Player;
-// import sinkingships.model.Cell;
-import sinkingships.model.ShotResponse;
+import org.mockito.Mockito;
+import sinkingships.model.Point;
+import sinkingships.model.Ship;
+import sinkingships.model.ShipType;
 
 /**
  * Unit test for the MainView class.
  */
 public class MainViewTest {
-  private PrintStream printStream;
-  private InputStream inputStream;
-  private MainView mainView;
-  private PipedOutputStream pos;
-  private PipedInputStream pis;
 
-  /**
-   * Set up the test fixture.
-   *
-   * @throws IOException if an I/O error occurs.
-   */
+  private final InputStream originalIn = System.in;
+  private final PrintStream originalOut = System.out;
+  private ByteArrayInputStream testIn;
+
   @BeforeEach
-  public void setUp() throws IOException {
-    this.printStream = mock(PrintStream.class);
-    this.inputStream = mock(InputStream.class);
-    this.mainView = new MainView(printStream, inputStream);
-    this.pos = new PipedOutputStream();
-    this.pis = new PipedInputStream(pos);
+  void setSystemIn() {
+    
+  }
+
+  @AfterEach
+  void restoreSystemIo() {
+    System.setIn(originalIn);
+    System.setOut(originalOut);
   }
 
   @Test
-  public void mainViewExists() {
-    assertNotNull(mainView, "mainView should be a class");
+  void displayWelcomeMessageOutputGreeting() {
+    PrintStream outStreamMock = mock(PrintStream.class);
+    System.setOut(outStreamMock);
+
+    var sut = new MainView();
+    sut.displayWelcomeMessage();
+
+    verify(outStreamMock).println(sut.GREETING);
   }
 
   @Test
-  public void mainViewShouldBeAbleToDisplayMessage() {
-    String message = "Hello World!";
-    String expected = message;
-    mainView.displayMessage(message);
-    verify(printStream, atLeastOnce()).println(expected);
+  void shouldGetInputToPlaceShipOnBoard() {
+    String input = "c4\n";
+    testIn = new ByteArrayInputStream(input.getBytes());
+    System.setIn(testIn);
+    Ship shipMock = mock(Ship.class);
+    Mockito.when(shipMock.getShipType()).thenReturn(ShipType.BATTLESHIP);
+
+    var sut = new MainView();
+    Point shipPlacement = new Point(0, 'a');
+    try {
+      shipPlacement = sut.getShipPlacement(shipMock);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    Point pointMock = mock(Point.class);
+    Mockito.when(pointMock.getHorizontalPosition()).thenReturn(4);
+    Mockito.when(pointMock.getVerticalPosition()).thenReturn('c');
+    assertEquals('c', shipPlacement.getVerticalPosition());
+    assertEquals(4,  shipPlacement.getHorizontalPosition());
   }
 
   @Test
-  public void boardArrayToStringShouldBeAbleToCreateStringFromArrayOfCells() {
-    // Cell[][] mockBoardArray = createMockBoardArray(10, 10);
-    // String actual = mainView.boardArrayToString(mockBoardArray);
-    String expected =
-          "   1  2  3  4  5  6  7  8  9  10  \n"
-        + "A  -  -  -  -  -  -  -  -  -  -  \n"
-        + "B  -  -  -  -  -  -  -  -  -  -  \n"
-        + "C  -  -  -  -  -  -  -  -  -  -  \n"
-        + "D  -  -  -  -  -  -  -  -  -  -  \n"
-        + "E  -  -  -  -  -  -  -  -  -  -  \n"
-        + "F  -  -  -  -  -  -  -  -  -  -  \n"
-        + "G  -  -  -  -  -  -  -  -  -  -  \n"
-        + "H  -  -  -  -  -  -  -  -  -  -  \n"
-        + "I  -  -  -  -  -  -  -  -  -  -  \n"
-        + "J  -  -  -  -  -  -  -  -  -  -  \n";
+  void shouldThrowIllegalArgumentExceptionForInputStringOfMoreThanThreeCharacters() {
+    String input = "c114\n";
+    testIn = new ByteArrayInputStream(input.getBytes());
+    System.setIn(testIn);
 
-    // assertEquals(expected, actual);
-  }
+    Ship shipMock = mock(Ship.class);
+    Mockito.when(shipMock.getShipType()).thenReturn(ShipType.BATTLESHIP);
 
-  // private Cell[][] createMockBoardArray(int width, int height) {
-  //   Cell[][] mockBoardArray = new Cell[height][width];
-  //   for (int y = 0; y < height; y++) {
-  //     for (int x = 0; x < width; x++) {
-  //       Cell mockCell = mock(Cell.class);
-  //       when(mockCell.getValue()).thenReturn("-");
-  //       mockBoardArray[y][x] = mockCell;
-  //     }
-  //   }
-  //   return mockBoardArray;
-  // }
-
-  // @Test
-  // public void mainViewShouldBeAbleToDisplayBoard() {
-  //   Cell[][] mockBoardArray = createMockBoardArray(10, 10);
-  //   mainView.displayBoard(mockBoardArray);
-  //   String expectedBoardString = mainView.boardArrayToString(mockBoardArray);
-  //   verify(printStream, atLeastOnce()).println(expectedBoardString);
-  // }
-
-  @Test
-  public void mainViewShouldBeAbleToClearScreen() {
-    mainView.clearScreen();
-    verify(printStream, times(50)).println();
-  }
-
-  // Consider doing this as a manual test instead.
-  // It depends on simulated user input and may be flaky.
-  @Test
-  public void mainViewShouldBeAbleToPressEnterToContinue()
-      throws IOException, InterruptedException {
-    MainView mainView = new MainView(printStream, pis);
-    Thread thread = new Thread(() -> {
-      try {
-        mainView.pressEnterToContinue();
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
+    var sut = new MainView();
+    assertThrows(IllegalArgumentException.class, () -> {
+      sut.getShipPlacement(shipMock);
     });
-    thread.start();
-    pos.write("\n".getBytes());
-    pos.flush();
-    pos.close();
-    Thread.sleep(1000);
-    verify(printStream, atLeastOnce()).println("Press enter to continue...");
-  }
-
-  // Consider doing this as a manual test instead.
-  // It depends on simulated user input and may be flaky.
-  @Test
-  public void shouldBeAbleToCollectInputfromUser() throws IOException {
-    MainView mainView = new MainView(printStream, pis);
-    new Thread(() -> {
-      mainView.getUserInput();
-    }).start();
-    pos.write("A1".getBytes());
-    pos.flush();
-    pos.close();
-    String actual = mainView.getUserInput();
-    String expected = "A1";
-    assertEquals(expected, actual);
   }
 
   @Test
-  public void shouldBeAbleToCollectValidCoordinateFromUser() {
-    String simulatedUserInput = "A1\n";
-    InputStream inputStream = new ByteArrayInputStream(simulatedUserInput.getBytes());
-    MainView mainView = new MainView(printStream, inputStream);
-    String regex = "^[A-J][1-9]$";
-    String actual = mainView.getUserInputCoordinates(regex, "Only A1-J9 is allowed");
-    verify(printStream).println("Enter coordinate: ");
-    Assertions.assertEquals("A1", actual);
+  void shouldThrowIllegalArgumentExceptionForInputStringWhereCharTooLow() {
+    String input = "`4\n";
+    testIn = new ByteArrayInputStream(input.getBytes());
+    System.setIn(testIn);
+
+    Ship shipMock = mock(Ship.class);
+    Mockito.when(shipMock.getShipType()).thenReturn(ShipType.BATTLESHIP);
+
+    var sut = new MainView();
+    assertThrows(IllegalArgumentException.class, () -> {
+      sut.getShipPlacement(shipMock);
+    });
   }
 
   @Test
-  public void displayEnumText_shouldBeAbleToDisplayMessageMatchedWithEnumValue() {
-    mainView.displayAttackResult(ShotResponse.HIT);
-    verify(printStream).println("Hit!");
-    mainView.displayAttackResult(ShotResponse.MISS);
-    verify(printStream).println("Miss!");
-    mainView.displayAttackResult(ShotResponse.HIT_AND_SUNK);
-    verify(printStream).println("Hit and sunk!");
-  }
+  void shouldThrowIllegalArgumentExceptionForInputStringWhereCharTooHigh() {
+    String input = "{4\n";
+    testIn = new ByteArrayInputStream(input.getBytes());
+    System.setIn(testIn);
 
-  // Should be able to Collect a rotation from user and return a corresponding enum value
-  // @Test
-  // public void shouldBeAbleToCollectRotationFromUser() {
-  //   String simulatedUserInput = "1\n";
-  //   InputStream inputStream = new ByteArrayInputStream(simulatedUserInput.getBytes());
-  //   MainView mainView = new MainView(printStream, inputStream);
-  //   Rotation actual = mainView.getUserInputRotation();
-  //   verify(printStream).println(
-  //       "Enter rotation:\n 1 = North\n 2 = West\n 3 = South\n 4 = East\n): ");
-  //   Assertions.assertEquals(Rotation.NORTH, actual);
-  // }
+    Ship shipMock = mock(Ship.class);
+    Mockito.when(shipMock.getShipType()).thenReturn(ShipType.BATTLESHIP);
 
-  @Test
-  public void shouldBeAbleToDisplayWinner() {
-    String simulatedUserInput = "1\n";
-    InputStream inputStream = new ByteArrayInputStream(simulatedUserInput.getBytes());
-    MainView mainView = new MainView(printStream, inputStream);
-    Player player1 = mock(Player.class);
-    when(player1.getName()).thenReturn("HumanPlayer");
-    mainView.displayWinner(player1);
-    verify(printStream).println("HumanPlayer won!");
-    Player player2 = mock(Player.class);
-    when(player2.getName()).thenReturn("ComputerPlayer");
-    mainView.displayWinner(player2);
-    verify(printStream).println("ComputerPlayer won!");
+    var sut = new MainView();
+    assertThrows(IllegalArgumentException.class, () -> {
+      sut.getShipPlacement(shipMock);
+    });
   }
 
   @Test
-  public void shouldBeAbleToCollectDecisionFromUser() {
-    String simulatedUserInput = "P\n";
-    InputStream inputStream = new ByteArrayInputStream(simulatedUserInput.getBytes());
-    MainView mainView = new MainView(printStream, inputStream);
-    boolean actual = mainView.getUserInputPlayAgainOrQuit();
-    verify(printStream).println("Would you like to:\n P = Play again?\n Q = Quit\n");
-    Assertions.assertEquals(true, actual);
+  void shouldThrowIllegalArgumentExceptionForInputStringWhereNumberNotDigit() {
+    String input = "ac4\n";
+    testIn = new ByteArrayInputStream(input.getBytes());
+    System.setIn(testIn);
+
+    Ship shipMock = mock(Ship.class);
+    Mockito.when(shipMock.getShipType()).thenReturn(ShipType.BATTLESHIP);
+
+    var sut = new MainView();
+    assertThrows(IllegalArgumentException.class, () -> {
+      sut.getShipPlacement(shipMock);
+    });
   }
 
-  @Test
-  public void shouldBeAbleToDisplayGoodbyeMessage() {
-    mainView.displayGoodbyeMessage();
-    verify(printStream).println("Goodbye!");
-  }
-
-  @Test
-  public void shouldBeAbleToPlaceCursorAtGivenCoordinate() {
-    mainView.setCursorPosition(1, 1);
-    verify(printStream).printf("\033[%d;%dH", 2, 2);
-  }
 }
