@@ -23,7 +23,7 @@ public class MainViewTest {
 
   private final InputStream originalIn = System.in;
   private final PrintStream originalOut = System.out;
-  private InputStream testIn;
+  private ByteArrayInputStream testIn;
 
   @BeforeEach
   void setSystemIn() {
@@ -71,8 +71,53 @@ public class MainViewTest {
   }
 
   @Test
-  void shouldThrowIllegalArgumentExceptionForTwoDigitNumbers() {
-    String input = "c14\n";
+  void shouldThrowIllegalArgumentExceptionForInputStringOfMoreThanThreeCharacters() {
+    String input = "c114\n";
+    testIn = new ByteArrayInputStream(input.getBytes());
+    System.setIn(testIn);
+
+    Ship shipMock = mock(Ship.class);
+    Mockito.when(shipMock.getShipType()).thenReturn(ShipType.BATTLESHIP);
+
+    var sut = new MainView();
+    assertThrows(IllegalArgumentException.class, () -> {
+      sut.getShipPlacement(shipMock);
+    });
+  }
+
+  @Test
+  void shouldThrowIllegalArgumentExceptionForInputStringWhereCharTooLow() {
+    String input = "`4\n";
+    testIn = new ByteArrayInputStream(input.getBytes());
+    System.setIn(testIn);
+
+    Ship shipMock = mock(Ship.class);
+    Mockito.when(shipMock.getShipType()).thenReturn(ShipType.BATTLESHIP);
+
+    var sut = new MainView();
+    assertThrows(IllegalArgumentException.class, () -> {
+      sut.getShipPlacement(shipMock);
+    });
+  }
+
+  @Test
+  void shouldThrowIllegalArgumentExceptionForInputStringWhereCharTooHigh() {
+    String input = "{4\n";
+    testIn = new ByteArrayInputStream(input.getBytes());
+    System.setIn(testIn);
+
+    Ship shipMock = mock(Ship.class);
+    Mockito.when(shipMock.getShipType()).thenReturn(ShipType.BATTLESHIP);
+
+    var sut = new MainView();
+    assertThrows(IllegalArgumentException.class, () -> {
+      sut.getShipPlacement(shipMock);
+    });
+  }
+
+  @Test
+  void shouldThrowIllegalArgumentExceptionForInputStringWhereNumberNotDigit() {
+    String input = "ac4\n";
     testIn = new ByteArrayInputStream(input.getBytes());
     System.setIn(testIn);
 

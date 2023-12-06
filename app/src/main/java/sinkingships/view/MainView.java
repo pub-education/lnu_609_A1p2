@@ -41,7 +41,7 @@ public class MainView {
     try {
       System.out.println("Enter the position of your " + ship.getShipType() + " (e.g. a1): ");
       String input = scanner.nextLine();
-      if (input.length() < 2 && input.length() > 3) {
+      if (input.length() < 2 || input.length() > 3) {
         throw new IllegalArgumentException("Invalid input. Please enter a letter and a number.");
       }
 
