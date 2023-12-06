@@ -24,7 +24,7 @@ import sinkingships.model.ShipType;
 public class MainViewTest {
 
   private final InputStream originalIn = System.in;
-  private ByteArrayInputStream testIn;
+  private InputStream testIn;
 
   @BeforeEach
   void setSystemIn() {
@@ -53,7 +53,7 @@ public class MainViewTest {
     Ship shipMock = mock(Ship.class);
     Mockito.when(shipMock.getShipType()).thenReturn(ShipType.BATTLESHIP);
 
-    var sut = new MainView();
+    var sut = new MainView(this.testIn);
     var shipPlacement = sut.getShipPlacement(shipMock);
 
     Point pointMock = mock(Point.class);
