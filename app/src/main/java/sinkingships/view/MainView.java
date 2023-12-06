@@ -3,7 +3,6 @@ package sinkingships.view;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
-import sinkingships.customexception.InvalidInputException;
 // import sinkingships.model.Cell;
 import sinkingships.model.Player;
 import sinkingships.model.Point;
@@ -43,7 +42,7 @@ public class MainView {
       System.out.println("Enter the position of your " + shipMock.getShipType() + " (e.g. a1): ");
       String input = scanner.nextLine();
       if (input.length() != 2) {
-        throw new InvalidInputException("Invalid input. Please enter a letter and a number.");
+        throw new IllegalArgumentException("Invalid input. Please enter a letter and a number.");
       }
       vertical = input.charAt(0);
       horizontal = Integer.parseInt(input.substring(1));
