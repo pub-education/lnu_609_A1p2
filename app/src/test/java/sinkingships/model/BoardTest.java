@@ -94,7 +94,6 @@ public class BoardTest {
     Mockito.when(mockPoint.getHorizontalPosition()).thenReturn(horizontalMax + 1);
     Mockito.when(mockPoint.getVerticalPosition()).thenReturn('a');
 
-    Ship mockShip = Mockito.mock(Ship.class);
     Mockito.when(mockShip.getPosition()).thenReturn(mockPoint);
 
     Point boardMockPoint = Mockito.mock(Point.class);
@@ -110,7 +109,6 @@ public class BoardTest {
     Mockito.when(mockPoint.getHorizontalPosition()).thenReturn(-1);
     Mockito.when(mockPoint.getVerticalPosition()).thenReturn('a');
 
-    Ship mockShip = Mockito.mock(Ship.class);
     Mockito.when(mockShip.getPosition()).thenReturn(mockPoint);
 
     Point boardMockPoint = Mockito.mock(Point.class);
@@ -127,7 +125,6 @@ public class BoardTest {
     Mockito.when(mockPoint.getHorizontalPosition()).thenReturn(horizontalMax - 1);
     Mockito.when(mockPoint.getVerticalPosition()).thenReturn('k');
 
-    Ship mockShip = Mockito.mock(Ship.class);
     Mockito.when(mockShip.getPosition()).thenReturn(mockPoint);
 
     Point boardMockPoint = Mockito.mock(Point.class);
@@ -144,7 +141,6 @@ public class BoardTest {
     Mockito.when(mockPoint.getHorizontalPosition()).thenReturn(horizontalMax - 1);
     Mockito.when(mockPoint.getVerticalPosition()).thenReturn('`');
 
-    Ship mockShip = Mockito.mock(Ship.class);
     Mockito.when(mockShip.getPosition()).thenReturn(mockPoint);
 
     Point boardMockPoint = Mockito.mock(Point.class);
@@ -160,7 +156,6 @@ public class BoardTest {
     Mockito.when(mockPoint.getHorizontalPosition()).thenReturn(horizontalMax - 1);
     Mockito.when(mockPoint.getVerticalPosition()).thenReturn('a');
 
-    Ship mockShip = Mockito.mock(Ship.class);
     Mockito.when(mockShip.getPosition()).thenReturn(mockPoint);
 
     Point boardMockPoint = Mockito.mock(Point.class);

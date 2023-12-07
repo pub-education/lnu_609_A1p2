@@ -44,7 +44,7 @@ public class MainViewTest {
     var sut = new MainView();
     sut.displayWelcomeMessage();
 
-    verify(outStreamMock).println(sut.GREETING);
+    verify(outStreamMock).println(MainView.GREETING);
   }
 
   @Test

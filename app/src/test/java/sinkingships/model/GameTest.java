@@ -16,7 +16,7 @@ public class GameTest {
 
   @Test
   public void gameHasBoard() {
-    Game game = new Game();
+    // Game game = new Game();
     // assertNotNull(game.getBoard(), "game should have a board");
   }
 }

@@ -1,15 +1,9 @@
 package sinkingships.view;
 
-import java.io.InputStream;
-import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
-// import sinkingships.model.Cell;
-import sinkingships.model.Player;
 import sinkingships.model.Point;
-import sinkingships.model.Rotation;
 import sinkingships.model.Ship;
-import sinkingships.model.ShotResponse;
 
 /**
  * View class for the game.
@@ -22,7 +16,7 @@ public class MainView {
   }
 
   public void displayWelcomeMessage() {
-    System.out.println(this.GREETING);
+    System.out.println(MainView.GREETING);
   }
 
   /**

@@ -1,7 +1,6 @@
 package sinkingships.model;
 
 import java.util.LinkedList;
-import javax.annotation.Nonnull;
 
 /**
  * Abstract class for a player.
