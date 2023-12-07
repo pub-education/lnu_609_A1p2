@@ -2,10 +2,13 @@ package sinkingships.view;
 
 import java.io.InputStream;
 import java.io.PrintStream;
-import sinkingships.customexception.InvalidInputException;
+import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 // import sinkingships.model.Cell;
 import sinkingships.model.Player;
+import sinkingships.model.Point;
 import sinkingships.model.Rotation;
+import sinkingships.model.Ship;
 import sinkingships.model.ShotResponse;
 
 /**
@@ -13,207 +16,52 @@ import sinkingships.model.ShotResponse;
  */
 public class MainView {
 
-  private PrintStream out;
-  private InputStream in;
+  public static final String GREETING = "Welcome to Sinking Ships!";
 
-  public MainView(PrintStream printStream, InputStream inputStream) {
-    this.out = printStream;
-    this.in = inputStream;
+  public MainView() {
   }
 
-  public void displayMessage(String message) {
-    out.println(message);
-  }
-
-  // protected String boardArrayToString(Cell[][] boardArray) {
-  //   StringBuilder boardString = new StringBuilder();
-  //   int width = boardArray[0].length;
-  //   boardString.append("   ");
-  //   for (int x = 1; x <= width; x++) {
-  //     boardString.append(x + "  ");
-  //   }
-  //   boardString.append("\n");
-  //   int height = boardArray.length;
-  //   for (int y = height - 1; y >= 0; y--) {
-  //     boardString.append((char) ('A' + (height - 1 - y))).append("  ");
-  //     for (int x = 0; x < width; x++) {
-  //       boardString.append(boardArray[y][x].getValue()).append("  ");
-  //     }
-  //     boardString.append("\n");
-  //   }
-  //   return boardString.toString();
-  // }
-
-  // public void displayBoard(Cell[][] boardArray) {
-  //   String boardString = boardArrayToString(boardArray);
-  //   displayMessage(boardString);
-  // }
-
-  /**
-   * Clears the screen.
-   */
-  public void clearScreen() {
-    for (int i = 0; i < 50; i++) {
-      out.println();
-    }
+  public void displayWelcomeMessage() {
+    System.out.println(this.GREETING);
   }
 
   /**
-   * Displays a message to the user and waits for user to press enter.
+   * Placing the Player's ships.
+   *
+   * @param ship - the ship to be placed
+   * @return - the point where the ship is placed
+   * @throws IllegalArgumentException - if the input is invalid
+   * @throws Exception                - for input reading errors
    */
-  public void pressEnterToContinue() {
-    displayMessage("Press enter to continue...");
+  public Point getShipPlacement(Ship ship) throws Exception {
+    char vertical = '`';
+    int horizontal = -1;
+    Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8.name());
+
     try {
-      in.read();
+      System.out.println("Enter the position of your " + ship.getShipType() + " (e.g. a1): ");
+      String input = scanner.nextLine();
+      if (input.length() < 2 || input.length() > 3) {
+        throw new IllegalArgumentException("Invalid input. Please enter a letter and a number.");
+      }
+
+      vertical = input.charAt(0);
+      horizontal = Integer.parseInt(input.substring(1));
+
+      if (vertical < 'a' || vertical > 'z') {
+        throw new IllegalArgumentException("Invalid input. Please enter a letter between a and z.");
+      }
+
+      return new Point(horizontal, vertical);
+    } catch (NumberFormatException e) {
+      throw new IllegalArgumentException(e.getMessage());
+    } catch (IllegalArgumentException e) {
+      throw new IllegalArgumentException(e.getMessage());
     } catch (Exception e) {
-      e.printStackTrace();
+      throw new Exception(e.getMessage());
+    } finally {
+      scanner.close();
     }
   }
 
-  protected String getUserInput() {
-    try {
-      byte[] buffer = new byte[100];
-      int length = in.read(buffer);
-      if (length == -1) {
-        return "";
-      }
-      return new String(buffer, 0, length).trim();
-    } catch (Exception e) {
-      e.printStackTrace();
-      return "";
-    }
-  }
-
-  /**
-   * Asks user for coordinates and validates input.
-   *
-   * @param regex regex to validate input
-   * @param allowed allowed characters
-   * @return validated input
-   */
-  public String getUserInputCoordinates(String regex, String allowed) {
-    displayMessage("Enter coordinate: ");
-    int attempts = 0;
-    while (attempts < 3) {
-      String input = getUserInput();
-      try {
-        checkInput(input, regex, allowed);
-        return input;
-      } catch (Exception e) {
-        displayMessage(e.getMessage());
-      }
-      attempts++;
-    }
-    throw new RuntimeException("Too many invalid inputs! Sleep on it!");
-  }
-
-  protected void checkInput(String input, String regex, String allowed)
-      throws InvalidInputException {
-    if (input == null || input.equals("")) {
-      throw new InvalidInputException(allowed);
-    }
-    input = input.toUpperCase();
-    if (!input.matches(regex)) {
-      throw new InvalidInputException(allowed);
-    }
-  }
-
-  /**
-   * Displays a message to the user that the attack was a hit, miss or sunk.
-   *
-   * @param hit result of the attack
-   */
-  public void displayAttackResult(ShotResponse hit) {
-    switch (hit) {
-      case HIT:
-        displayMessage("Hit!");
-        break;
-      case MISS:
-        displayMessage("Miss!");
-        break;
-      case HIT_AND_SUNK:
-        displayMessage("Hit and sunk!");
-        break;
-      default:
-        break;
-    }
-  }
-
-  public void setCursorPosition(int row, int col) {
-    out.printf("\033[%d;%dH", row + 1, col + 1);
-  }
-
-  /**
-   * Displays a goodbye message and waits for user to press enter.
-   */
-  public void displayGoodbyeMessage() {
-    clearScreen();
-    setCursorPosition(1, 1);
-    displayMessage("Goodbye!");
-    pressEnterToContinue();
-  }
-
-  /**
-   * Asks user for rotation and validates input.
-   *
-   * @return validated input
-   */
-  public Rotation getUserInputRotation() {
-    displayMessage("Enter rotation:\n 1 = North\n 2 = West\n 3 = South\n 4 = East\n): ");
-    int attempts = 0;
-    while (attempts < 4) {
-      String input = getUserInput();
-      try {
-        checkInput(input, "^[1-4]$", "1-4");
-        attempts++;
-        switch (input) {
-          case "1":
-            return Rotation.NORTH;
-          case "2":
-            return Rotation.WEST;
-          case "3":
-            return Rotation.SOUTH;
-          case "4":
-            return Rotation.EAST;
-          default:
-            break;
-        }
-      } catch (Exception e) {
-        displayMessage(e.getMessage());
-      }
-    }
-    return Rotation.NONE;
-  }
-
-  /**
-   * Asks user if they want to play again or quit.
-   *
-   * @return true if user wants to play again, false if user wants to quit.
-   */
-  public boolean getUserInputPlayAgainOrQuit() {
-    displayMessage("Would you like to:\n P = Play again?\n Q = Quit\n");
-    int attempts = 0;
-    while (attempts < 3) {
-      String input = getUserInput();
-      try {
-        checkInput(input, "^[PQ]$", "P or Q");
-        attempts++;
-        switch (input) {
-          case "P":
-            return true;
-          case "Q":
-            return false;
-          default:
-            break;
-        }
-      } catch (Exception e) {
-        displayMessage(e.getMessage());
-      }
-    }
-    return false;
-  }
-
-  public void displayWinner(Player player) {
-    displayMessage(player.getName() + " won!");
-  }
 }

@@ -28,5 +28,4 @@ public class Point {
   public int getHorizontalPosition() {
     return this.horizontalPosition;
   }
-  
 }
